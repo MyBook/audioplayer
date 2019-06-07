@@ -35,6 +35,7 @@ const common = {
         process.env.NODE_ENV || "development",
       ),
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+      global: { IS_BROWSER: true },
     }),
   ],
 

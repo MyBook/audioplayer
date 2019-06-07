@@ -1,11 +1,13 @@
 // export * from "./Chunk";
 import React from "react";
 import { render } from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+
 import Player from "../src";
 
 function options(isActiveSubscription) {
   return {
-    TrialMessage: <div>123</div>,
+    TrialMessage: () => <div>123</div>,
     isFreeFragment: !isActiveSubscription,
     colors: {
       almostWhite: "#F4F4F4",
@@ -15,7 +17,11 @@ function options(isActiveSubscription) {
   };
 }
 
+window.player = {};
+
 render(
-  <Player {...options(false)} bookId={1} />,
+  <BrowserRouter>
+    <Player {...options(true)} bookId={1} />
+  </BrowserRouter>,
   document.querySelector("#app"),
 );
