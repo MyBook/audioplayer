@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/*
+
+[include]
+./src/
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+
+[strict]
