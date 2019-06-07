@@ -6,7 +6,6 @@ import config from "../webpack/webpack.config";
 import devMiddleware from "webpack-dev-middleware";
 import hotMiddleware from "webpack-hot-middleware";
 import book from "./book";
-import fs from "fs";
 import path from "path";
 
 const app = express();

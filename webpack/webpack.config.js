@@ -17,8 +17,7 @@ const common = {
   output: {
     path: publicPath,
     publicPath: publicPath,
-    chunkFilename: isProdMode ? "[name].[contenthash].js" : "[name].js",
-    filename: isProdMode ? "[name].[contenthash].js" : "[name].js",
+    filename: "[name].js",
   },
   resolve: {
     modules: [path.resolve(srcPath), "node_modules"],
@@ -48,19 +47,7 @@ const common = {
         options: {
           presets: [
             "@babel/preset-flow",
-            [
-              "@babel/preset-env",
-              {
-                modules: false,
-                useBuiltIns: false,
-                loose: true,
-                targets: {
-                  browsers: isProdMode
-                    ? browserList
-                    : ["last 1 Chrome versions"],
-                },
-              },
-            ],
+            ["@babel/preset-env"],
             "@babel/react",
           ],
         },
@@ -97,17 +84,17 @@ const development = {
     },
   },
   entry: {
-    main: [
+    index: [
       "react-hot-loader/patch",
       "webpack-hot-middleware/client",
       "../example/index.js",
     ],
   },
-  resolve: {
-    alias: {
-      "react-dom": "@hot-loader/react-dom",
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     "react-dom": "@hot-loader/react-dom",
+  //   },
+  // },
   plugins: [
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new WebpackNotifierPlugin({ title: "Client" }),
@@ -117,9 +104,27 @@ const development = {
 
 const prodOrTest = {
   mode: "production",
-  devtool: "source-map",
   entry: {
-    main: ["index.js"],
+    index: ["index.jsx"],
+  },
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, "./node_modules/react"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+    },
+  },
+  externals: [
+    'react',
+    'react-dom',
+    'react-router',
+    /^babel\/.+$/,
+  ],
+  output: {
+    path: publicPath,
+    // publicPath: "/dist",
+    // library: "audio-player",
+    libraryTarget: "umd",
+    filename: "[name].js",
   },
 };
 

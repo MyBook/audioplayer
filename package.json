@@ -1,6 +1,20 @@
 {
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "BABEL_ENV=dev NODE_ENV=development nodemon --watch webpack --watch example --exec 'node --inspect example/app.js'"
+    "dev": "BABEL_ENV=dev NODE_ENV=development nodemon --watch webpack --watch example --exec 'node --inspect example/app.js'",
+    "build": "BABEL_ENV=production NODE_ENV=production webpack --config=webpack/webpack.config.js",
+    "devbuild": "yarn install --production=true"
+  },
+  "peerDependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+    },
+  "devDependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0"
   },
   "dependencies": {
     "@babel/cli": "^7.4.4",
@@ -19,9 +33,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
+
     "express": "^4.17.1",
     "flow-bin": "^0.100.0",
     "helmet": "^3.18.0",
@@ -31,8 +43,6 @@
     "polished": "^3.4.0",
     "prettier": "^1.17.1",
     "raven": "^2.6.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "react-hot-loader": "^4.9.0",
     "react-perfect-scrollbar": "^1.5.3",
     "react-redux": "^7.0.3",
