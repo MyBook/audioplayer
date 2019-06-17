@@ -31,7 +31,7 @@ export default async function({
   };
 
   return instance({
-    url,
+    url: "/api/" + url,
     headers: {
       Accept: `application/json${v2 ? "; version=2" : ""}`,
       ...defaultHeaders,
