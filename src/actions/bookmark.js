@@ -36,6 +36,7 @@ export const getAutoBookmarkFromServer = (bookId: number) => async (
     const { chapterNumber, position } = localBookmarks[book.id];
     await dispatch(changeChapter(chapterNumber));
     await dispatch(handleTimeUpdate(position));
+    await dispatch({ type: "IS_NEED_TO_TIME_UPDATE" });
   }
 
   const result = await doFetch({

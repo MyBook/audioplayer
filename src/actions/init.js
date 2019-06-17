@@ -25,11 +25,20 @@ export const init = (isFreeFragment: boolean) => async (
 
   await dispatch(setFreeFragment(isFreeFragment));
 
-  player.addEventListener("loadedmetadata", () => {
+  player.addEventListener("loadedmetadata", async () => {
     dispatch({
       type: "LOADED_META_DATA",
       payload: { duration: player.duration },
     });
+  });
+
+  player.addEventListener("canplay", async () => {
+    const { isNeedToTimeUpdate, currentTime } = getState();
+
+    if (isNeedToTimeUpdate) {
+      await dispatch(handleTimeUpdate(currentTime));
+      await dispatch({ type: "IS_NO_NEED_TO_TIME_UPDATE" });
+    }
   });
 
   player.addEventListener("timeupdate", () => {

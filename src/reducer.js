@@ -17,6 +17,7 @@ const initialState = {
   volume: 1,
   statisticsSeconds: 0,
   isFreeFragment: true,
+  isNeedToTimeUpdate: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -130,6 +131,18 @@ export default function reducer(state = initialState, action) {
 
     case "CHANGE_BOOK":
       return initialState;
+
+    case "IS_NEED_TO_TIME_UPDATE":
+      return {
+        ...state,
+        isNeedToTimeUpdate: true,
+      };
+
+    case "IS_NO_NEED_TO_TIME_UPDATE":
+      return {
+        ...state,
+        isNeedToTimeUpdate: false,
+      };
 
     default:
       return state;

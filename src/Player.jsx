@@ -74,13 +74,11 @@ class Player extends PureComponent<Props> {
       getAutoBookmarkFromServer,
       getBookFromServer,
       bookId,
-      handlePlay,
     } = this.props;
 
     await getBookFromServer(bookId);
     await init(isFreeFragment);
     await getAutoBookmarkFromServer(bookId);
-    await handlePlay();
   };
 
   handleBackward = () => {
