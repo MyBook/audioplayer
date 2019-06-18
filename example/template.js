@@ -1,5 +1,6 @@
-import manifest from "../dist/manifest";
 export default function() {
+  const manifest = require("../dist/manifest");
+
   return `
   <!doctype html>
   <html lang="en">
@@ -19,7 +20,7 @@ export default function() {
     <body>
       <div id="app"></div>
     </body>
-    <script type="text/javascript" src="${manifest["main.js"]}"></script>
+    <script type="text/javascript" src="${manifest["index.js"]}"></script>
   </html>
   `;
 }

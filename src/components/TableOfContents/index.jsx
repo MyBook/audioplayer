@@ -17,11 +17,7 @@ import {
 import Dropdown from "components/Dropdown";
 import ChaptersIcon from "components/Icons/Chapters";
 import { connect } from "react-redux";
-import {
-  changeChapter,
-  handlePlay,
-  tableOfContentsShowTrigger,
-} from "actions";
+import { changeChapter, handlePlay, tableOfContentsShowTrigger } from "actions";
 import truncate from "utils/truncate";
 import timeFormat from "components/utils/timeFormat";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -73,6 +69,7 @@ function TableOfContents({
   currentTime,
   duration,
   isFetched,
+  Link,
 }) {
   const icon = (
     <ChaptersIcon
@@ -108,8 +105,12 @@ function TableOfContents({
                       })[type]
                     }
                   </TypeWrapper>
-                  <Title to={bookLink}>{truncate(name, 25)}</Title>
-                  <Author to={authorLink}>{authorName}</Author>
+                  <Link to={bookLink} className="clear-links-style">
+                    <Title>{truncate(name, 25)}</Title>
+                  </Link>
+                  <Link to={authorLink} className="clear-links-style">
+                    <Author>{authorName}</Author>
+                  </Link>
                 </div>
               </DropdownHeader>
               <Chapters

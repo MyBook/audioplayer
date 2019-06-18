@@ -14,6 +14,7 @@ import {
 import * as actions from "actions";
 import Timeline from "components/Timeline";
 import BookInfo from "components/BookInfo";
+import type Link from "react-router-dom";
 import Notification from "components/Notification";
 import TableOfContents from "components/TableOfContents";
 import VolumeControl from "components/VolumeControl";
@@ -24,15 +25,11 @@ import PlayPauseButton from "components/PlayPauseButton";
 import FreeFragmentMessage from "components/FreeFragmentMessage";
 import ErrorBoundary from "components/ErrorBoundary";
 import { defaultForwardSecondsCount } from "playerConstants";
-import type {
-  Book,
-  TrialMessageProps,
-  colors,
-  trackingFunctions,
-} from "playerConstants";
+import type { Book, TrialMessageProps, colors } from "playerConstants";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,
+  Link: ComponentType<Link>,
   isFreeFragment: boolean,
   isFetched: boolean,
   isBookmarksConflictNotificationShow: boolean,
@@ -114,6 +111,7 @@ class Player extends PureComponent<Props> {
       isFreeFragment,
       TrialMessage,
       colors,
+      Link,
     } = this.props;
 
     return (
@@ -145,10 +143,11 @@ class Player extends PureComponent<Props> {
                   book={book}
                   currentChapterNumber={currentChapterNumber}
                   isFetched={isFetched}
+                  Link={Link}
                 />
 
                 <IconsWrapper>
-                  {!isFreeFragment && <TableOfContents />}
+                  {!isFreeFragment && <TableOfContents Link={Link} />}
                   <BackwardIcon
                     onClick={this.handleBackward}
                     isFetched={isFetched}

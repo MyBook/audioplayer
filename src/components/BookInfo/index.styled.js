@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { rgba } from "polished";
 
 export const Cover = styled.img`
@@ -18,26 +17,14 @@ export const Cover = styled.img`
   }
 `;
 
-export const CoverWrapper = styled(Link)`
+export const CoverWrapper = styled.span`
   background: ${props => props.theme.primary};
   margin-right: 8px;
   display: inline-block;
   border-radius: 6px;
 `;
 
-export const Author = styled.a`
-  display: block;
-  font-size: 12px;
-  text-decoration: none;
-  color: ${props => props.theme.gray};
-  transition: 0.2s;
-
-  &:hover {
-    color: black;
-  }
-`;
-
-export const Title = styled(Link)`
+export const Title = styled.span`
   font-size: 14px;
   display: block;
   text-decoration: none;

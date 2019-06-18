@@ -18,6 +18,7 @@ export default class Dropdown extends PureComponent<Props> {
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
+    document.addEventListener("touchstart", this.handleClickOutside);
     document.addEventListener("keydown", this.handleEscButton);
   }
 

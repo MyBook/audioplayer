@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { Cover as CoverStyled } from "components/BookInfo/index.styled";
-import { Link } from "react-router-dom";
 import { CoverWrapper as CoverWrapperStyled } from "components/BookInfo/index.styled";
 
 export const TableOfContentsWrapper = styled.div`
@@ -29,7 +28,7 @@ export const Chapter = styled.div`
     `}
 `;
 
-export const Author = styled(Link)`
+export const Author = styled.span`
   display: block;
   font-size: 14px;
   line-height: 16px;
@@ -43,7 +42,7 @@ export const Author = styled(Link)`
   }
 `;
 
-export const Title = styled(Link)`
+export const Title = styled.span`
   display: block;
   font-size: 14px;
   line-height: 16px;

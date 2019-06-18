@@ -1,7 +1,6 @@
 //@flow
 import * as React from "react";
 import { ButtonStyled, LoaderStyled } from "components/Button/index.styled";
-import { Link } from "react-router-dom";
 
 type ButtonProps = {
   children: React.Node,
@@ -41,7 +40,7 @@ export default class Button extends React.PureComponent<ButtonProps, {}> {
       to,
     } = this.props;
 
-    let component = to ? Link : "button";
+    let component = to ? "a" : "button";
     if (href) component = "a";
 
     return (

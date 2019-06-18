@@ -5,13 +5,17 @@
   text-size-adjust: none;
 }
 
+.player-wrapper .clear-links-style {
+  border-bottom: none !important;
+}
+
 .player-wrapper input,
 .player-wrapper textarea,
 .player-wrapper button {
   appearance: none;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";
 }
 
 /* Аккуратные таблицы */
@@ -23,8 +27,8 @@
 .player-wrapper {
   -webkit-font-smoothing: antialiased;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol";
   font-size: 14px;
   line-height: 1.6;
 }
@@ -34,7 +38,6 @@
 .player-wrapper a {
   text-decoration: none;
 }
-
 
 /*
 * Scrollbar rail styles
@@ -49,6 +52,7 @@
   touch-action: auto;
   -ms-touch-action: auto;
 }
+
 .ps__rail-x {
   display: none;
   opacity: 0;

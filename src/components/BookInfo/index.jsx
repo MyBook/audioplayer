@@ -19,18 +19,22 @@ type Props = {
 };
 
 export default function(props: Props) {
-  const { currentChapterNumber, book = {}, isFetched } = props;
+  const { currentChapterNumber, book = {}, isFetched, Link } = props;
   const { name, bookLink, default_image } = book;
   const maxBookTitleLength = 35;
 
   if (isFetched) {
     return (
       <BookInfoWrapper>
-        <CoverWrapper to={bookLink}>
-          <Cover src={default_image} alt={name} />
-        </CoverWrapper>
+        <Link to={bookLink} className="clear-links-style">
+          <CoverWrapper>
+            <Cover src={default_image} alt={name} />
+          </CoverWrapper>
+        </Link>
         <div>
-          <Title to={bookLink}>{truncate(name, maxBookTitleLength)}</Title>
+          <Link to={bookLink} className="clear-links-style">
+            <Title>{truncate(name, maxBookTitleLength)}</Title>
+          </Link>
           Глава {currentChapterNumber + 1}
         </div>
       </BookInfoWrapper>

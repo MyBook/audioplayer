@@ -36,6 +36,7 @@ const common = {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
       global: { IS_BROWSER: true },
     }),
+    // new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
 
   module: {
@@ -90,15 +91,20 @@ const development = {
       "../example/index.js",
     ],
   },
-  // resolve: {
-  //   alias: {
-  //     "react-dom": "@hot-loader/react-dom",
-  //   },
-  // },
+  resolve: {
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    },
+  },
   plugins: [
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new WebpackNotifierPlugin({ title: "Client" }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+      },
+    }),
   ],
 };
 
@@ -107,22 +113,39 @@ const prodOrTest = {
   entry: {
     index: ["index.jsx"],
   },
-  resolve: {
-    alias: {
-      react: path.resolve(__dirname, "./node_modules/react"),
-      "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+  externals: {
+    react: {
+      root: "React",
+      commonjs2: "react",
+      commonjs: "react",
+      amd: "react",
+      umd: "react",
+    },
+    "react-dom": {
+      root: "ReactDOM",
+      commonjs2: "react-dom",
+      commonjs: "react-dom",
+      amd: "react-dom",
+      umd: "react-dom",
+    },
+    "styled-components": {
+      commonjs: "styled-components",
+      commonjs2: "styled-components",
+      amd: "styled-components",
+    },
+    "redux-logger": {
+      commonjs: "redux-logger",
+      commonjs2: "redux-logger",
+      amd: "redux-logger",
     },
   },
-  externals: [
-    'react',
-    'react-dom',
-    'react-router',
-    /^babel\/.+$/,
-  ],
+  optimization: {
+    minimizer: [],
+  },
   output: {
     path: publicPath,
-    // publicPath: "/dist",
-    // library: "audio-player",
+    library: "audio-player-js",
+    umdNamedDefine: true,
     libraryTarget: "umd",
     filename: "[name].js",
   },
