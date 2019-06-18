@@ -1,5 +1,5 @@
 {
-  "name": "audio-player-js",
+  "name": "@mybook/audio-player-js",
   "main": "dist/index.js",
   "scripts": {
     "dev": "BABEL_ENV=dev NODE_ENV=development nodemon --watch webpack --watch example --exec 'node example/app.js'",
@@ -9,7 +9,6 @@
   "peerDependencies": {
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.1",
     "styled-components": "^4.3.0"
   },
@@ -21,6 +20,7 @@
     "eslint-plugin-prettier": "^3.1.0"
   },
   "dependencies": {
+    "react-redux": "^7.0.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "polished": "^3.4.0",
@@ -30,7 +30,6 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-transform-flow-strip-types": "^7.4.4",
     "@babel/plugin-transform-runtime": "^7.4.4",
-    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
