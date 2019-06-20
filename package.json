@@ -13,18 +13,13 @@
     "styled-components": "^4.3.0"
   },
   "devDependencies": {
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
-    "eslint-plugin-prettier": "^3.1.0"
+    "eslint-plugin-prettier": "^3.1.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   },
   "dependencies": {
-    "react-redux": "^7.0.3",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "polished": "^3.4.0",
-    "axios": "^0.19.0",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
@@ -36,20 +31,33 @@
     "@babel/register": "^7.4.4",
     "@babel/runtime": "^7.4.5",
     "@hot-loader/react-dom": "^16.8.6",
+    "axios": "^0.19.0",
+    "axios-mock-adapter": "^1.16.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "express": "^4.17.1",
     "flow-bin": "^0.100.0",
     "helmet": "^3.18.0",
+    "jest": "^24.8.0",
+    "jest-mock-console": "^1.0.0",
     "js-cookie": "^2.2.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
+    "polished": "^3.4.0",
     "prettier": "^1.17.1",
     "raven": "^2.6.4",
     "react-hot-loader": "^4.9.0",
     "react-perfect-scrollbar": "^1.5.3",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.1",
     "webpack": "^4.33.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.2",
@@ -58,5 +66,27 @@
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1",
     "webpack-notifier": "^1.7.0"
+  },
+  "jest": {
+    "verbose": true,
+    "automock": false,
+    "setupFiles": [
+      "./tests/shim.js",
+      "./tests/setupJest.js"
+    ],
+    "testRegex": "tests/.*test\\.js$",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|isvg|ttf|woff|woff2|mp4|webm|wav|m4a|aac|oga)$": "./tests/mocks/fileMock.js"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "testURL": "https://test.zvukislov.ru"
   }
 }
