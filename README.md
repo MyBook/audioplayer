@@ -120,5 +120,16 @@ window.player.trackingFunctions = {
 };
 ```
 
-##Tests
+Also need to upgrade webpack config:
+```js
+  resolve: {
+    alias: {
+      react: path.resolve("./node_modules/react"),
+      "react-dom": path.resolve("./node_modules/react-dom"),
+      "styled-components": path.resolve("./node_modules/styled-components"),
+    },
+  },
+```
+
+## Tests
 🚧 Under constructions 🚧
