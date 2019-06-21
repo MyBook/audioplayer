@@ -18,11 +18,12 @@ function PlayPauseButton({
   handlePlay,
   isPlaying,
   isFetched,
+  urls,
 }: Props) {
   return (
     <Wrapper>
       {isPlaying ? (
-        <PauseIcon onClick={handlePause} isFetched={isFetched} />
+        <PauseIcon onClick={() => handlePause(urls)} isFetched={isFetched} />
       ) : (
         <PlayIcon onClick={handlePlay} isFetched={isFetched} />
       )}

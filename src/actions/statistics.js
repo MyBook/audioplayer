@@ -2,7 +2,7 @@
 import uuid from "uuid/v1";
 import doFetch from "utils/doFetch";
 
-export const sendStatistics = () => async (
+export const sendStatistics = urls => async (
   dispatch: Function,
   getState: Function,
 ) => {
@@ -16,8 +16,10 @@ export const sendStatistics = () => async (
 
   if (+statisticsSeconds !== 0) {
     try {
+      const { url, version } = urls.setStatistics();
       await doFetch({
-        url: "statistics/",
+        url,
+        version,
         method: "POST",
         data: JSON.stringify({
           objects: [...getLocalStatistics(), statisticElement],

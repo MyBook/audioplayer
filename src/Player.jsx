@@ -71,11 +71,13 @@ class Player extends PureComponent<Props> {
       getAutoBookmarkFromServer,
       getBookFromServer,
       bookId,
+      urls,
+      bookAdaptor,
     } = this.props;
 
-    await getBookFromServer(bookId);
-    await init(isFreeFragment);
-    await getAutoBookmarkFromServer(bookId);
+    await getBookFromServer(bookId, urls, bookAdaptor);
+    await init(isFreeFragment, urls);
+    await getAutoBookmarkFromServer(bookId, urls);
   };
 
   handleBackward = () => {
@@ -112,6 +114,7 @@ class Player extends PureComponent<Props> {
       TrialMessage,
       colors,
       Link,
+      urls,
     } = this.props;
 
     return (
@@ -135,7 +138,7 @@ class Player extends PureComponent<Props> {
                 duration={duration}
                 handleTimeUpdate={handleTimeUpdate}
                 handlePlay={handlePlay}
-                handlePause={handlePause}
+                handlePause={() => handlePause(urls)}
                 isFetched={isFetched}
               />
               <ControlWrapper>
@@ -152,7 +155,7 @@ class Player extends PureComponent<Props> {
                     onClick={this.handleBackward}
                     isFetched={isFetched}
                   />
-                  <PlayPauseButton isFetched={isFetched} />
+                  <PlayPauseButton isFetched={isFetched} urls={urls} />
                   <ForwardIcon
                     onClick={this.handleForward}
                     isFetched={isFetched}

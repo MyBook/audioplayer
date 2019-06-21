@@ -1,4 +1,4 @@
-const player = global.IS_BROWSER ? new Audio() : {};
+const player = typeof Audio !== "undefined" ? new Audio() : {};
 const initialState = {
   isFetched: false,
   isFetching: false,

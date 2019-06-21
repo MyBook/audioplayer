@@ -1,23 +1,16 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const isProdOrTest =
-  process.env.STAGE === "real" || process.env.STAGE === "test";
-
-export const instance = axios.create({
-  // baseURL: `${global.IS_BROWSER ? "https" : "http"}://${BASE_HOST}${
-  //   !global.IS_BROWSER && isProdOrTest ? ":8080" : ""
-  // }/api/`,
-});
+export const instance = axios.create();
 
 export default async function({
   url,
   headers = {},
   dispatch = null,
+  version = false,
   method = "GET",
   data: body = {},
   returnCookie = false,
-  v2 = false,
 }) {
   const token = Cookies.get(
     typeof CSRF_COOKIE_NAME !== "undefined" ? CSRF_COOKIE_NAME : "token",
@@ -26,14 +19,14 @@ export default async function({
   const defaultHeaders = {
     "X-CSRFToken": token || "token",
     "Content-Type": "application/json",
-    "Testing-New-Zvuki": "1",
     credentials: "same-origin",
+    "x-proxy-api-host": "test.mybook.tech",
   };
 
   return instance({
     url: "/api/" + url,
     headers: {
-      Accept: `application/json${v2 ? "; version=2" : ""}`,
+      accept: `application/json; ${version ? `version=${version}` : ""}`,
       ...defaultHeaders,
       ...headers,
     },

@@ -3,7 +3,6 @@ import keyboardEventsListeners from "components/utils/keyboardEventsListeners";
 import { defaultForwardSecondsCount } from "playerConstants";
 import { sendStatistics } from "actions/statistics";
 import doFetch from "utils/doFetch";
-import { bookAdaptor } from "components/utils/bookAdaptor";
 import {
   handlePause,
   handlePlay,
@@ -17,13 +16,17 @@ import { changePlaybackRate } from "actions/playbackRate";
 
 import tracking from "components/utils/tracking";
 
-export const init = (isFreeFragment: boolean) => async (
+export const init = (isFreeFragment: boolean, urls) => async (
   dispatch: Function,
   getState: Function,
 ) => {
   const { player } = getState();
 
   await dispatch(setFreeFragment(isFreeFragment));
+
+  const { isFreeFragment: _isFreeFragment, book } = getState();
+  const source = _isFreeFragment ? book.preview : book.files[0];
+  player.src = source.absolute_url;
 
   player.addEventListener("loadedmetadata", async () => {
     dispatch({
@@ -60,8 +63,8 @@ export const init = (isFreeFragment: boolean) => async (
 
   if (!isFreeFragment) {
     window.addEventListener("beforeunload", () => {
-      dispatch(setAutoBookmark());
-      dispatch(sendStatistics());
+      dispatch(setAutoBookmark(urls));
+      dispatch(sendStatistics(urls));
     });
   }
 
@@ -94,7 +97,7 @@ export const init = (isFreeFragment: boolean) => async (
     triggerPlay: () => {
       const { isPlaying } = getState();
       if (isPlaying) {
-        dispatch(handlePause());
+        dispatch(handlePause(urls));
         tracking("onKeyPause");
       } else {
         dispatch(handlePlay());
@@ -123,17 +126,17 @@ export const init = (isFreeFragment: boolean) => async (
   dispatch({ type: "INIT" });
 };
 
-export const getBookFromServer = (bookId: number) => async (
+export const getBookFromServer = (bookId: number, urls, bookAdaptor) => async (
   dispatch: Function,
-  getState: Function,
 ) => {
   dispatch({ type: "START_FETCHING" });
-  const { player, isFreeFragment } = getState();
-  const bookRaw = await doFetch({ url: `audiobooks/${bookId}/` });
-  const book = bookAdaptor(bookRaw);
-  const source = isFreeFragment ? book.preview : book.files[0];
 
-  player.src = source.absolute_url;
+  const { url, version } = urls.getBook(bookId);
+  const bookRaw = await doFetch({
+    url,
+    version,
+  });
+  const book = bookAdaptor(bookRaw);
 
   dispatch({ type: "GET_BOOK_FROM_SERVER", payload: book });
 };

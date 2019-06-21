@@ -21,7 +21,7 @@ export const applyServerBookmark = () => async (
   await dispatch(handleTimeUpdate(serverBookMark.position));
 };
 
-export const getAutoBookmarkFromServer = (bookId: number) => async (
+export const getAutoBookmarkFromServer = (bookId: number, urls) => async (
   dispatch: Function,
   getState: Function,
 ) => {
@@ -39,8 +39,10 @@ export const getAutoBookmarkFromServer = (bookId: number) => async (
     await dispatch({ type: "IS_NEED_TO_TIME_UPDATE" });
   }
 
+  const { url, version } = urls.getAutoBookmark(bookId);
   const result = await doFetch({
-    url: `audiobooks/${bookId}/auto-bookmark/`,
+    url,
+    version,
   });
 
   if (!result.file) {
@@ -68,16 +70,18 @@ export const getAutoBookmarkFromServer = (bookId: number) => async (
   }
 };
 
-export const setAutoBookmark = () => async (
+export const setAutoBookmark = urls => async (
   dispatch: Function,
   getStore: Function,
 ) => {
   const store = getStore();
   saveLocalAutoBookmark(store);
   const autoBookMark = createBookMark(store);
+  const { url, version } = urls.setAutoBookmark();
 
   const result = await doFetch({
-    url: "auto-bookmarks/",
+    url,
+    version,
     method: "POST",
     data: JSON.stringify(autoBookMark),
   });
@@ -102,9 +106,13 @@ function saveLocalAutoBookmark(store) {
 }
 
 function createBookMark({ book, currentTime, currentChapterNumber }) {
+  const date = new Date();
+
+  date.setSeconds(0, 0);
+
   return {
     book: book.id,
-    bookmarked_at: new Date().toISOString(),
+    bookmarked_at: date.toISOString(),
     file: book.files[currentChapterNumber].id,
     chapterNumber: currentChapterNumber,
     position: Math.floor(currentTime),

@@ -3,7 +3,7 @@ import { sendStatistics } from "actions/statistics";
 import { setAutoBookmark } from "actions/bookmark";
 import tracking from "components/utils/tracking";
 
-export const handlePause = () => async (
+export const handlePause = urls => async (
   dispatch: Function,
   getState: Function,
 ) => {
@@ -13,8 +13,8 @@ export const handlePause = () => async (
   tracking("onPause");
 
   if (!isFreeFragment) {
-    dispatch(setAutoBookmark());
-    dispatch(sendStatistics());
+    dispatch(setAutoBookmark(urls));
+    dispatch(sendStatistics(urls));
     //TODO(victorkolb): надо правильные фавиконки
     // document.querySelectorAll(".favicon").forEach(el => {
     //   if (!(el instanceof HTMLLinkElement)) return;
