@@ -132,4 +132,4 @@ Also need to upgrade webpack config:
 ```
 
 ## Tests
-🚧 Under constructions 🚧
+Under constructions 🚧
