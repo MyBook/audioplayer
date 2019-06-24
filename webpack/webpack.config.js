@@ -1,14 +1,15 @@
 const path = require("path");
 const webpack = require("webpack");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
-const WebpackNotifierPlugin = require("webpack-notifier");
 const merge = require("webpack-merge");
 
 const publicPath = path.resolve("dist") + "/";
 const srcPath = path.resolve("src/");
 const isProdMode = process.env.NODE_ENV === "production";
-const ManifestPlugin = require("webpack-manifest-plugin");
+
+let BundleAnalyzerPlugin = {};
+let WebpackNotifierPlugin = {};
+let ManifestPlugin = {};
+let development = {};
 
 const common = {
   name: "main",
@@ -25,7 +26,6 @@ const common = {
   },
 
   plugins: [
-    new ManifestPlugin({ writeToFileEmit: true }),
     new webpack.optimize.LimitChunkCountPlugin({
       maxChunks: 1,
     }),
@@ -36,7 +36,6 @@ const common = {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
       global: { IS_BROWSER: true },
     }),
-    // new BundleAnalyzerPlugin({ openAnalyzer: false }),
   ],
 
   module: {
@@ -72,41 +71,49 @@ const common = {
   },
 };
 
-const development = {
-  mode: "development",
-  devServer: {
-    contentBase: publicPath,
-    publicPath: publicPath,
-    serverSideRender: true,
-    overlay: true,
-    hot: true,
-    stats: {
-      colors: true,
-    },
-  },
-  entry: {
-    index: [
-      "react-hot-loader/patch",
-      "webpack-hot-middleware/client",
-      "../example/index.js",
-    ],
-  },
-  resolve: {
-    alias: {
-      "react-dom": "@hot-loader/react-dom",
-    },
-  },
-  plugins: [
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new WebpackNotifierPlugin({ title: "Client" }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production"),
+if (!isProdMode) {
+  BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+    .BundleAnalyzerPlugin;
+  WebpackNotifierPlugin = require("webpack-notifier");
+  ManifestPlugin = require("webpack-manifest-plugin");
+
+  development = {
+    mode: "development",
+    devServer: {
+      contentBase: publicPath,
+      publicPath: publicPath,
+      serverSideRender: true,
+      overlay: true,
+      hot: true,
+      stats: {
+        colors: true,
       },
-    }),
-  ],
-};
+    },
+    entry: {
+      index: [
+        "react-hot-loader/patch",
+        "webpack-hot-middleware/client",
+        "../example/index.js",
+      ],
+    },
+    resolve: {
+      alias: {
+        "react-dom": "@hot-loader/react-dom",
+      },
+    },
+    plugins: [
+      new ManifestPlugin({ writeToFileEmit: true }),
+      new BundleAnalyzerPlugin({ openAnalyzer: false }),
+      new WebpackNotifierPlugin({ title: "Client" }),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify("production"),
+        },
+      }),
+    ],
+  };
+}
 
 const prodOrTest = {
   mode: "production",
