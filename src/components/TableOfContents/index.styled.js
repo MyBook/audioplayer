@@ -3,7 +3,7 @@ import { Cover as CoverStyled } from "components/BookInfo/index.styled";
 import { CoverWrapper as CoverWrapperStyled } from "components/BookInfo/index.styled";
 
 export const TableOfContentsWrapper = styled.div`
-  height: 140px;
+  height: 275px;
 `;
 
 export const Timing = styled.div`
@@ -86,7 +86,7 @@ export const DropdownContainer = styled.div`
   left: -144px;
   right: 0;
   margin: 0 auto;
-  max-height: 312px;
+  max-height: 403px;
   border-radius: 24px;
 
   @media (max-width: 940px) {

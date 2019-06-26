@@ -52,6 +52,7 @@ function Chapters(props) {
       </Chapter>
     );
   });
+
   return (
     <PerfectScrollbar>
       <TableOfContentsWrapper>{chapters}</TableOfContentsWrapper>
