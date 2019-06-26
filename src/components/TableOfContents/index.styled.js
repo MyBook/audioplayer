@@ -121,6 +121,7 @@ export const DropdownHeader = styled.div`
 export const TypeWrapper = styled.div`
   display: flex;
   font-size: 10px;
+  letter-spacing: 1px;
   color: #9b9b9b;
   text-transform: uppercase;
   margin-bottom: 5px;

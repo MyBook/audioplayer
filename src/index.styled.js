@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from "styled-components";
 export const PlayerWrapper = styled.div`
   position: fixed;
   z-index: 3;
-  bottom: 16px;
+  bottom: 8px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -28,7 +28,6 @@ export const PlayerWrapper = styled.div`
 
   @media (max-width: 440px) {
     width: 304px;
-    bottom: 8px;
   }
 `;
 
