@@ -4,10 +4,7 @@ import PlaybackRateIcon from "components/Icons/PlaybackRate";
 import Dropdown from "components/Dropdown";
 import HorizontalSlider from "components/Sliders/HorizontalSlider";
 import { connect } from "react-redux";
-import {
-  playbackRateControlTrigger,
-  changePlaybackRate,
-} from "actions";
+import { playbackRateControlTrigger, changePlaybackRate } from "actions";
 import {
   SliderWrapper,
   Scale,

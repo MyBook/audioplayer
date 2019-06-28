@@ -26,6 +26,8 @@ import FreeFragmentMessage from "components/FreeFragmentMessage";
 import ErrorBoundary from "components/ErrorBoundary";
 import { defaultForwardSecondsCount } from "utils/playerConstants";
 import type { Book, TrialMessageProps, colors } from "utils/playerConstants";
+import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
+import { Wrapper as PlaybackRateWrapper } from "components/PlaybackRateControl/index.styled";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,
@@ -165,7 +167,9 @@ class Player extends PureComponent<Props> {
                   {!isFreeFragment ? (
                     <TableOfContents Link={Link} hidePlayer={hidePlayer} />
                   ) : (
-                    <div>123</div>
+                    <PowerOffIconWrapper>
+                      <PowerOff onClick={hidePlayer} isFetched={isFetched} />
+                    </PowerOffIconWrapper>
                   )}
                   <BackwardIcon
                     onClick={this.handleBackward}
@@ -176,8 +180,10 @@ class Player extends PureComponent<Props> {
                     onClick={this.handleForward}
                     isFetched={isFetched}
                   />
-                  {!isFreeFragment && (
+                  {!isFreeFragment ? (
                     <PlaybackRateControl isFetched={isFetched} />
+                  ) : (
+                    <PlaybackRateWrapper />
                   )}
                 </IconsWrapper>
 

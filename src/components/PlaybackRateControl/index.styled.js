@@ -25,6 +25,8 @@ export const Scale = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   margin-left: 20px;
+  min-width: 32px;
+  min-height: 32px;
 
   @media (max-width: 440px) {
     margin-left: 10px;

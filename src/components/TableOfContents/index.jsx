@@ -101,7 +101,7 @@ function TableOfContents({
                   hidePlayer();
                 }}
               >
-                <PowerOff /> Выключить плеер
+                <PowerOff isFetched={isFetched} /> Выключить плеер
               </PowerOffWrapper>
               <DropdownHeader>
                 <Link to={bookLink} className="clear-links-style">

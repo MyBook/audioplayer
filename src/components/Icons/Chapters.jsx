@@ -1,6 +1,6 @@
 //@flow
 import React, { memo } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { IconWrapper } from "components/Icons/index.styled";
 
 const ChaptersIcon = styled(IconWrapper)`
