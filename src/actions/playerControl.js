@@ -13,8 +13,8 @@ export const handlePause = urls => async (
   tracking("onPause");
 
   if (!isFreeFragment) {
-    dispatch(setAutoBookmark(urls));
     dispatch(sendStatistics(urls));
+    dispatch(setAutoBookmark(urls));
     //TODO(victorkolb): надо правильные фавиконки
     // document.querySelectorAll(".favicon").forEach(el => {
     //   if (!(el instanceof HTMLLinkElement)) return;

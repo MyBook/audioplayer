@@ -13,6 +13,7 @@ import {
   DropDownIconWrapper,
   DropdownWrapper,
   TypeWrapper,
+  PowerOffWrapper,
 } from "components/TableOfContents/index.styled";
 import Dropdown from "components/Dropdown";
 import ChaptersIcon from "components/Icons/Chapters";
@@ -22,6 +23,7 @@ import truncate from "utils/truncate";
 import timeFormat from "components/utils/timeFormat";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import TypeIcons from "components/TypeIcons";
+import PowerOff from "components/Icons/PowerOff";
 
 function Chapters(props) {
   const {
@@ -71,6 +73,7 @@ function TableOfContents({
   duration,
   isFetched,
   Link,
+  hidePlayer,
 }) {
   const icon = (
     <ChaptersIcon
@@ -92,10 +95,15 @@ function TableOfContents({
         <Dropdown trigger={tableOfContentsShowTrigger}>
           <DropdownContainer>
             <DropdownWrapper>
+              <PowerOffWrapper onClick={hidePlayer}>
+                <PowerOff /> Выключить плеер
+              </PowerOffWrapper>
               <DropdownHeader>
-                <CoverWrapper to={bookLink}>
-                  <Cover src={default_image} alt="" />
-                </CoverWrapper>
+                <Link to={bookLink} className="clear-links-style">
+                  <CoverWrapper>
+                    <Cover src={default_image} alt="" />
+                  </CoverWrapper>
+                </Link>
                 <div>
                   <TypeWrapper>
                     {

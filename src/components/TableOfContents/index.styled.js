@@ -3,7 +3,7 @@ import { Cover as CoverStyled } from "components/BookInfo/index.styled";
 import { CoverWrapper as CoverWrapperStyled } from "components/BookInfo/index.styled";
 
 export const TableOfContentsWrapper = styled.div`
-  height: 275px;
+  height: 230px;
 `;
 
 export const Timing = styled.div`
@@ -113,7 +113,7 @@ export const DropdownHeader = styled.div`
   font-size: 16px;
   position: relative;
   border-bottom: 1px solid #f6f6f6;
-  padding: 16px 0;
+  padding-bottom: 16px;
   display: flex;
   align-items: flex-start;
 `;
@@ -125,4 +125,22 @@ export const TypeWrapper = styled.div`
   color: #9b9b9b;
   text-transform: uppercase;
   margin-bottom: 5px;
+`;
+
+export const PowerOffWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  color: #7c7f84;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  svg {
+    display: block;
+    margin-right: 10px;
+  }
 `;

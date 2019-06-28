@@ -50,6 +50,7 @@ type Props = {
   volume: number,
   book: Book,
   colors: colors,
+  urls: {},
 };
 
 class Player extends PureComponent<Props> {
@@ -58,10 +59,18 @@ class Player extends PureComponent<Props> {
     this.init(this.props.isFreeFragment);
   }
 
+  async componentWillUnmount() {
+    const { handlePause, urls } = this.props;
+
+    handlePause(urls);
+  }
+
   componentDidUpdate(prevProps) {
-    if (this.props.bookId !== prevProps.bookId) {
-      this.props.changeBook();
-      this.init(this.props.isFreeFragment);
+    const { bookId, changeBook, isFreeFragment, urls } = this.props;
+
+    if (bookId !== prevProps.bookId) {
+      changeBook();
+      this.init(isFreeFragment, urls);
     }
   }
 
@@ -115,6 +124,7 @@ class Player extends PureComponent<Props> {
       colors,
       Link,
       urls,
+      hidePlayer,
     } = this.props;
 
     return (
@@ -150,7 +160,9 @@ class Player extends PureComponent<Props> {
                 />
 
                 <IconsWrapper>
-                  {!isFreeFragment && <TableOfContents Link={Link} />}
+                  {!isFreeFragment && (
+                    <TableOfContents Link={Link} hidePlayer={hidePlayer} />
+                  )}
                   <BackwardIcon
                     onClick={this.handleBackward}
                     isFetched={isFetched}
