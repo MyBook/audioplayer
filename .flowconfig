@@ -9,7 +9,10 @@
 [lints]
 
 [options]
-module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
+module.name_mapper='^actions\/\(.*\)$' -> '<PROJECT_ROOT>/src/actions/\1'
+
 
 
 [strict]
