@@ -95,7 +95,12 @@ function TableOfContents({
         <Dropdown trigger={tableOfContentsShowTrigger}>
           <DropdownContainer>
             <DropdownWrapper>
-              <PowerOffWrapper onClick={hidePlayer}>
+              <PowerOffWrapper
+                onClick={() => {
+                  tableOfContentsShowTrigger();
+                  hidePlayer();
+                }}
+              >
                 <PowerOff /> Выключить плеер
               </PowerOffWrapper>
               <DropdownHeader>

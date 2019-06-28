@@ -11,7 +11,7 @@ import {
   ScrubArea,
   HorizontalWrapper,
 } from "components/Sliders/index.styled";
-import { defaultHorizontalSliderWidth } from "playerConstants";
+import { defaultHorizontalSliderWidth } from "utils/playerConstants";
 
 type Props = {
   minimumValue: number,

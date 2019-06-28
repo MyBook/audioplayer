@@ -1,7 +1,7 @@
 //@flow
 import React from "react";
 import type { ComponentType } from "react";
-import type { TrialMessageProps } from "playerConstants";
+import type { TrialMessageProps } from "utils/playerConstants";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,

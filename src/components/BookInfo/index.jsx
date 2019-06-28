@@ -10,7 +10,7 @@ import {
   ChapterPlaceholder,
 } from "components/BookInfo/index.styled";
 import truncate from "utils/truncate";
-import type { Book } from "playerConstants";
+import type { Book } from "utils/playerConstants";
 
 type Props = {
   currentChapterNumber: number,

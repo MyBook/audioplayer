@@ -14,7 +14,7 @@ import {
 import * as actions from "actions";
 import Timeline from "components/Timeline";
 import BookInfo from "components/BookInfo";
-import type Link from "react-router-dom";
+import { Link } from "react-router-dom";
 import Notification from "components/Notification";
 import TableOfContents from "components/TableOfContents";
 import VolumeControl from "components/VolumeControl";
@@ -24,8 +24,8 @@ import ForwardIcon from "components/Icons/Forward";
 import PlayPauseButton from "components/PlayPauseButton";
 import FreeFragmentMessage from "components/FreeFragmentMessage";
 import ErrorBoundary from "components/ErrorBoundary";
-import { defaultForwardSecondsCount } from "playerConstants";
-import type { Book, TrialMessageProps, colors } from "playerConstants";
+import { defaultForwardSecondsCount } from "utils/playerConstants";
+import type { Book, TrialMessageProps, colors } from "utils/playerConstants";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,
@@ -44,6 +44,8 @@ type Props = {
   applyServerBookmark: Function,
   changeVolume: Function,
   muteTrigger: Function,
+  bookAdaptor: Function,
+  hidePlayer: Function,
   currentTime: number,
   duration: number,
   currentChapterNumber: number,
@@ -66,11 +68,11 @@ class Player extends PureComponent<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    const { bookId, changeBook, isFreeFragment, urls } = this.props;
+    const { bookId, changeBook, isFreeFragment } = this.props;
 
     if (bookId !== prevProps.bookId) {
       changeBook();
-      this.init(isFreeFragment, urls);
+      this.init(isFreeFragment);
     }
   }
 
@@ -160,8 +162,10 @@ class Player extends PureComponent<Props> {
                 />
 
                 <IconsWrapper>
-                  {!isFreeFragment && (
+                  {!isFreeFragment ? (
                     <TableOfContents Link={Link} hidePlayer={hidePlayer} />
+                  ) : (
+                    <div>123</div>
                   )}
                   <BackwardIcon
                     onClick={this.handleBackward}

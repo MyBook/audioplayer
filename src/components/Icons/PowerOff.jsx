@@ -22,7 +22,7 @@ const Icon = styled.svg`
   }
 `;
 
-export default function({ onClick }) {
+export default function({ onClick }: { onClick?: Function }) {
   return (
     <Icon
       onClick={onClick}

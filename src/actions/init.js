@@ -1,6 +1,6 @@
 //@flow
 import keyboardEventsListeners from "components/utils/keyboardEventsListeners";
-import { defaultForwardSecondsCount } from "playerConstants";
+import { defaultForwardSecondsCount } from "utils/playerConstants";
 import { sendStatistics } from "actions/statistics";
 import doFetch from "utils/doFetch";
 import {
