@@ -94,15 +94,15 @@ function TableOfContents({
       {isTableOfContentsShow && (
         <Dropdown trigger={tableOfContentsShowTrigger}>
           <DropdownContainer>
+            <PowerOffWrapper
+              onClick={() => {
+                tableOfContentsShowTrigger();
+                hidePlayer();
+              }}
+            >
+              <PowerOff isFetched={isFetched} /> Выключить плеер
+            </PowerOffWrapper>
             <DropdownWrapper>
-              <PowerOffWrapper
-                onClick={() => {
-                  tableOfContentsShowTrigger();
-                  hidePlayer();
-                }}
-              >
-                <PowerOff isFetched={isFetched} /> Выключить плеер
-              </PowerOffWrapper>
               <DropdownHeader>
                 <Link to={bookLink} className="clear-links-style">
                   <CoverWrapper>

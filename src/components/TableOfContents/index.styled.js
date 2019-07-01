@@ -70,7 +70,7 @@ export const CoverWrapper = styled(CoverWrapperStyled)`
 export const DropdownWrapper = styled.div`
   position: relative;
   background: white;
-  padding: 0 16px;
+  padding: 16px 16px 0;
   box-sizing: border-box;
   z-index: 1;
   border-radius: 24px;
@@ -82,17 +82,17 @@ export const DropdownContainer = styled.div`
   box-shadow: 0 4px 13px rgba(0, 0, 0, 0.1);
   z-index: 1;
   position: absolute;
-  bottom: 40px;
+  bottom: 35px;
   left: -144px;
   right: 0;
   margin: 0 auto;
-  max-height: 403px;
+  max-height: 435px;
   border-radius: 24px;
 
   @media (max-width: 940px) {
     position: fixed;
     left: 0;
-    bottom: 117px;
+    bottom: 105px;
     z-index: 1;
     width: 304px;
   }
@@ -131,9 +131,11 @@ export const PowerOffWrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 14px 0;
   color: #7c7f84;
   transition: 0.2s;
+  padding: 16px;
+  background: ${props => props.theme.almostWhite};
+  border-radius: 24px 24px 0 0;
 
   &:hover {
     opacity: 0.8;
