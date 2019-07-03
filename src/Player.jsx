@@ -14,7 +14,6 @@ import {
 import * as actions from "actions";
 import Timeline from "components/Timeline";
 import BookInfo from "components/BookInfo";
-import { Link } from "react-router-dom";
 import Notification from "components/Notification";
 import TableOfContents from "components/TableOfContents";
 import VolumeControl from "components/VolumeControl";
