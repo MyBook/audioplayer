@@ -48,6 +48,10 @@ export const BookInfoWrapper = styled.div`
   @media (max-width: 940px) {
     display: none;
   }
+
+  .clear-links-style {
+    display: flex;
+  }
 `;
 
 export const CoverPlaceholder = styled.div`

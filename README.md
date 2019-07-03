@@ -25,10 +25,11 @@ function playerOptions(isActiveSubscription) {
     Link: Link,
     TrialMessage: TrialMessage,
     isFreeFragment: !isActiveSubscription,
-    colors: {
+    styles: {
       almostWhite: "#F4F4F4",
       primary: "#00B0C2",
       gray: "#545454",
+      borderRadius: '24px'
     },
     urls: {
       getBook: bookId => ({ url: `audiobooks/${bookId}/`, version: 4 }),

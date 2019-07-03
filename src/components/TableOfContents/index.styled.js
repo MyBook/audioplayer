@@ -3,7 +3,8 @@ import { Cover as CoverStyled } from "components/BookInfo/index.styled";
 import { CoverWrapper as CoverWrapperStyled } from "components/BookInfo/index.styled";
 
 export const TableOfContentsWrapper = styled.div`
-  height: 230px;
+  max-height: 230px;
+  min-height: 100px;
 `;
 
 export const Timing = styled.div`
@@ -73,7 +74,7 @@ export const DropdownWrapper = styled.div`
   padding: 16px 16px 0;
   box-sizing: border-box;
   z-index: 1;
-  border-radius: 24px;
+  border-radius: ${props => props.theme.borderRadius};
 `;
 
 export const DropdownContainer = styled.div`
@@ -87,7 +88,7 @@ export const DropdownContainer = styled.div`
   right: 0;
   margin: 0 auto;
   max-height: 435px;
-  border-radius: 24px;
+  border-radius: ${props => props.theme.borderRadius};
 
   @media (max-width: 940px) {
     position: fixed;
@@ -116,6 +117,10 @@ export const DropdownHeader = styled.div`
   padding-bottom: 16px;
   display: flex;
   align-items: flex-start;
+
+  .clear-links-style {
+    display: flex;
+  }
 `;
 
 export const TypeWrapper = styled.div`
@@ -135,7 +140,8 @@ export const PowerOffWrapper = styled.div`
   transition: 0.2s;
   padding: 16px;
   background: ${props => props.theme.almostWhite};
-  border-radius: 24px 24px 0 0;
+  border-radius: ${props => props.theme.borderRadius}
+    ${props => props.theme.borderRadius} 0 0;
 
   &:hover {
     opacity: 0.8;

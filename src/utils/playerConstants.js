@@ -14,10 +14,11 @@ export type TrialMessageProps = {
   bookLink: string,
 };
 
-export type colors = {
+export type styles = {
   almostWhite: string,
   primary: string,
   gray: string,
+  borderRadius: string,
 };
 
 export type trackingFunctions = {

@@ -25,7 +25,7 @@ import PlayPauseButton from "components/PlayPauseButton";
 import FreeFragmentMessage from "components/FreeFragmentMessage";
 import ErrorBoundary from "components/ErrorBoundary";
 import { defaultForwardSecondsCount } from "utils/playerConstants";
-import type { Book, TrialMessageProps, colors } from "utils/playerConstants";
+import type { Book, TrialMessageProps, styles } from "utils/playerConstants";
 import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
 import { Wrapper as PlaybackRateWrapper } from "components/PlaybackRateControl/index.styled";
 
@@ -53,7 +53,7 @@ type Props = {
   currentChapterNumber: number,
   volume: number,
   book: Book,
-  colors: colors,
+  styles: styles,
   urls: {},
 };
 
@@ -96,6 +96,7 @@ class Player extends PureComponent<Props> {
   handleBackward = () => {
     const { handleTimeUpdate, currentTime } = this.props;
     const newTime = currentTime - defaultForwardSecondsCount;
+
     if (newTime > 0) {
       handleTimeUpdate(newTime);
     } else {
@@ -125,14 +126,14 @@ class Player extends PureComponent<Props> {
       volume,
       isFreeFragment,
       TrialMessage,
-      colors,
+      styles,
       Link,
       urls,
       hidePlayer,
     } = this.props;
 
     return (
-      <ThemeProvider theme={colors}>
+      <ThemeProvider theme={styles}>
         <PlayerWrapper className="player-wrapper">
           <ErrorBoundary>
             {isFreeFragment && isFetched && (

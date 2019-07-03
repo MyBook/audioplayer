@@ -19,7 +19,7 @@ export const NotificationWrapper = styled.div`
   background: white;
   line-height: 1.6;
   padding: 20px 100px 20px 20px;
-  border-radius: 2px;
+  border-radius: ${props => props.theme.borderRadius};
   box-sizing: border-box;
 
   @media (max-width: 835px) {

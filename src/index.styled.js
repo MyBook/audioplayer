@@ -12,7 +12,7 @@ export const PlayerWrapper = styled.div`
   user-select: none;
   height: 90px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  border-radius: 24px;
+  border-radius: ${props => props.theme.borderRadius};
 
   button {
     outline: none;

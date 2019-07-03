@@ -31,6 +31,7 @@ export default function(props: Props) {
             <Cover src={default_image} alt={name} />
           </CoverWrapper>
         </Link>
+
         <div>
           <Link to={bookLink} className="clear-links-style">
             <Title>{truncate(name, maxBookTitleLength)}</Title>
