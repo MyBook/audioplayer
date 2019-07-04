@@ -38,14 +38,16 @@ type Props = {
   changeBook: Function,
   init: Function,
   getAutoBookmarkFromServer: Function,
-  getBookFromServer: Function,
+  getBook: Function,
   handleTimeUpdate: Function,
   handlePlay: Function,
   handlePause: Function,
+  resetPlayer: Function,
   applyServerBookmark: Function,
   changeVolume: Function,
   muteTrigger: Function,
   bookAdaptor: Function,
+  seriesAdaptor: Function,
   hidePlayer: Function,
   currentTime: number,
   duration: number,
@@ -69,10 +71,10 @@ class Player extends PureComponent<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    const { bookId, changeBook, isFreeFragment } = this.props;
+    const { bookId, resetPlayer, isFreeFragment } = this.props;
 
     if (bookId !== prevProps.bookId) {
-      changeBook();
+      resetPlayer();
       this.init(isFreeFragment);
     }
   }
@@ -81,13 +83,14 @@ class Player extends PureComponent<Props> {
     const {
       init,
       getAutoBookmarkFromServer,
-      getBookFromServer,
+      getBook,
       bookId,
       urls,
       bookAdaptor,
+      seriesAdaptor,
     } = this.props;
 
-    await getBookFromServer(bookId, urls, bookAdaptor);
+    await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
     await init(isFreeFragment, urls);
     await getAutoBookmarkFromServer(bookId, urls);
   };
@@ -129,6 +132,7 @@ class Player extends PureComponent<Props> {
       Link,
       urls,
       hidePlayer,
+      changeBook,
     } = this.props;
 
     return (
@@ -165,7 +169,11 @@ class Player extends PureComponent<Props> {
 
                 <IconsWrapper>
                   {!isFreeFragment ? (
-                    <TableOfContents Link={Link} hidePlayer={hidePlayer} />
+                    <TableOfContents
+                      Link={Link}
+                      hidePlayer={hidePlayer}
+                      changeBook={changeBook}
+                    />
                   ) : (
                     <PowerOffIconWrapper>
                       <PowerOff onClick={hidePlayer} isFetched={isFetched} />

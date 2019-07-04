@@ -59,13 +59,26 @@ export const Title = styled.span`
 `;
 
 export const Cover = styled(CoverStyled)`
-  width: 100px;
+  width: ${props => (props.isPodcastOrLecture ? "120" : 100)}px;
   height: 100px;
   border-radius: 6px;
+
+  ${props =>
+    props.isPodcastOrLecture &&
+    css`
+      box-shadow: none;
+      filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.2));
+    `}
 `;
 
 export const CoverWrapper = styled(CoverWrapperStyled)`
   border-radius: 6px;
+
+  ${props =>
+    props.isPodcastOrLecture &&
+    css`
+      background: none;
+    `}
 `;
 
 export const DropdownWrapper = styled.div`

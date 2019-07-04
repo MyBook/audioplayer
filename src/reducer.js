@@ -3,6 +3,8 @@ const initialState = {
   isFetched: false,
   isFetching: false,
   book: {},
+  series: {},
+  isPodcastOrLecture: false,
   player: player,
   isPlaying: false,
   isTableOfContentsShow: false,
@@ -20,12 +22,12 @@ const initialState = {
   isNeedToTimeUpdate: false,
 };
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
+export default function reducer(state = initialState, { type, payload }) {
+  switch (type) {
     case "SET_FREE_FRAGMENT":
       return {
         ...state,
-        isFreeFragment: action.payload,
+        isFreeFragment: payload,
       };
 
     case "START_FETCHING":
@@ -34,19 +36,26 @@ export default function reducer(state = initialState, action) {
         isFetching: true,
       };
 
-    case "GET_BOOK_FROM_SERVER":
+    case "GET_BOOK":
       return {
         ...state,
-        book: action.payload,
+        book: payload.book,
+        isPodcastOrLecture: payload.isPodcastOrLecture,
         isFetched: true,
         isFetching: false,
+      };
+
+    case "GET_SERIES":
+      return {
+        ...state,
+        series: payload,
       };
 
     case "CHANGE_SOURCE":
       return {
         ...state,
-        src: action.payload.src,
-        currentChapterNumber: action.payload.currentChapterNumber,
+        src: payload.src,
+        currentChapterNumber: payload.currentChapterNumber,
         duration: 0,
       };
 
@@ -65,32 +74,32 @@ export default function reducer(state = initialState, action) {
     case "LOADED_META_DATA":
       return {
         ...state,
-        duration: action.payload.duration,
+        duration: payload.duration,
       };
 
     case "TIME_UPDATE":
       return {
         ...state,
-        currentTime: action.payload,
+        currentTime: payload,
       };
 
     case "TABLE_OF_CONTENTS_TRIGGER":
       return {
         ...state,
-        isTableOfContentsShow: action.payload,
+        isTableOfContentsShow: payload,
       };
 
     case "PLAYBACK_CONTROL_RATE_TRIGGER":
       return {
         ...state,
-        isPlaybackRateControlShow: action.payload,
+        isPlaybackRateControlShow: payload,
       };
 
     case "BOOKMARKS_CONFLICT_NOTIFICATION_SHOW":
       return {
         ...state,
         isBookmarksConflictNotificationShow: true,
-        serverBookMark: action.payload,
+        serverBookMark: payload,
       };
 
     case "BOOKMARKS_CONFLICT_NOTIFICATION_HIDE":
@@ -102,19 +111,19 @@ export default function reducer(state = initialState, action) {
     case "SET_SERVER_BOOKMARK":
       return {
         ...state,
-        serverBookMark: action.payload,
+        serverBookMark: payload,
       };
 
     case "CHANGE_PLAYBACK_RATE":
       return {
         ...state,
-        playbackRate: action.payload,
+        playbackRate: payload,
       };
 
     case "CHANGE_VOLUME":
       return {
         ...state,
-        volume: action.payload,
+        volume: payload,
       };
 
     case "ADD_STATISTICS_SECONDS":
@@ -129,9 +138,6 @@ export default function reducer(state = initialState, action) {
         statisticsSeconds: 0,
       };
 
-    case "CHANGE_BOOK":
-      return initialState;
-
     case "IS_NEED_TO_TIME_UPDATE":
       return {
         ...state,
@@ -143,6 +149,9 @@ export default function reducer(state = initialState, action) {
         ...state,
         isNeedToTimeUpdate: false,
       };
+
+    case "RESET_PLAYER":
+      return initialState;
 
     default:
       return state;

@@ -60,7 +60,6 @@ export const handleTimeUpdate = (time: number) => async (
 
 export const setFreeFragment = (isFreeFragment: boolean) => async (
   dispatch: Function,
-  getState: Function,
 ) => {
   dispatch({
     type: "SET_FREE_FRAGMENT",
@@ -68,7 +67,7 @@ export const setFreeFragment = (isFreeFragment: boolean) => async (
   });
 };
 
-export const changeBook = () => async (
+export const resetPlayer = () => async (
   dispatch: Function,
   getState: Function,
 ) => {
@@ -76,6 +75,6 @@ export const changeBook = () => async (
   player.pause();
 
   dispatch({
-    type: "CHANGE_BOOK",
+    type: "RESET_PLAYER",
   });
 };

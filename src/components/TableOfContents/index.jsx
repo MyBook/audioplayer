@@ -1,9 +1,6 @@
 //@flow
 import React from "react";
 import {
-  TableOfContentsWrapper,
-  Chapter,
-  Timing,
   Author,
   Title,
   Cover,
@@ -20,48 +17,11 @@ import ChaptersIcon from "components/Icons/Chapters";
 import { connect } from "react-redux";
 import { changeChapter, handlePlay, tableOfContentsShowTrigger } from "actions";
 import truncate from "utils/truncate";
-import timeFormat from "components/utils/timeFormat";
-import PerfectScrollbar from "react-perfect-scrollbar";
+
 import TypeIcons from "components/TypeIcons";
 import PowerOff from "components/Icons/PowerOff";
-
-function Chapters(props) {
-  const {
-    currentChapterNumber,
-    files,
-    changeChapter,
-    handlePlay,
-    currentTime,
-    duration,
-  } = props;
-
-  const chapters = files.map((file, i) => {
-    return (
-      <Chapter
-        key={i}
-        className={`jest-player-chapter-${i + 1}`}
-        active={currentChapterNumber === i}
-        onClick={async () => {
-          await changeChapter(i);
-          await handlePlay();
-        }}
-      >
-        Глава {i + 1}
-        <Timing>
-          {i === currentChapterNumber
-            ? `${timeFormat(currentTime)} — ${timeFormat(duration)}`
-            : timeFormat(file.seconds)}
-        </Timing>
-      </Chapter>
-    );
-  });
-
-  return (
-    <PerfectScrollbar className="table-of-contents">
-      <TableOfContentsWrapper>{chapters}</TableOfContentsWrapper>
-    </PerfectScrollbar>
-  );
-}
+import Chapters from "components/TableOfContents/Chapters";
+import Episodes from "components/TableOfContents/Episodes";
 
 function TableOfContents({
   isTableOfContentsShow,
@@ -75,13 +35,16 @@ function TableOfContents({
   isFetched,
   Link,
   hidePlayer,
+  series,
+  isPodcastOrLecture,
+  changeBook,
 }) {
   const icon = (
     <ChaptersIcon
       onClick={tableOfContentsShowTrigger}
       isActive={isTableOfContentsShow}
       isFetched={isFetched}
-      className="dropdown-trigger-button jest-player-table-of-contents-button"
+      className="dropdown-trigger-button"
     />
   );
 
@@ -89,7 +52,15 @@ function TableOfContents({
     return <DropDownIconWrapper>{icon}</DropDownIconWrapper>;
   }
 
-  const { name, bookLink, authorLink, authorName, default_image, type } = book;
+  const {
+    name,
+    bookLink,
+    authorLink,
+    authorName,
+    default_image,
+    type,
+    id: currentBookId,
+  } = book;
   return (
     <DropDownIconWrapper>
       {isTableOfContentsShow && (
@@ -105,9 +76,16 @@ function TableOfContents({
             </PowerOffWrapper>
             <DropdownWrapper>
               <DropdownHeader>
-                <Link to={bookLink} className="clear-links-style">
-                  <CoverWrapper>
-                    <Cover src={default_image} alt="" />
+                <Link
+                  to={isPodcastOrLecture ? series.url : bookLink}
+                  className="clear-links-style"
+                >
+                  <CoverWrapper isPodcastOrLecture={isPodcastOrLecture}>
+                    <Cover
+                      isPodcastOrLecture={isPodcastOrLecture}
+                      src={isPodcastOrLecture ? series.cover : default_image}
+                      alt=""
+                    />
                   </CoverWrapper>
                 </Link>
                 <div>
@@ -120,22 +98,38 @@ function TableOfContents({
                       })[type]
                     }
                   </TypeWrapper>
-                  <Link to={bookLink} className="clear-links-style">
-                    <Title>{truncate(name, 25)}</Title>
+                  <Link
+                    to={isPodcastOrLecture ? series.url : bookLink}
+                    className="clear-links-style"
+                  >
+                    <Title>
+                      {truncate(isPodcastOrLecture ? series.name : name, 25)}
+                    </Title>
                   </Link>
                   <Link to={authorLink} className="clear-links-style">
                     <Author>{authorName}</Author>
                   </Link>
                 </div>
               </DropdownHeader>
-              <Chapters
-                currentChapterNumber={currentChapterNumber}
-                changeChapter={changeChapter}
-                currentTime={currentTime}
-                duration={duration}
-                files={book.files}
-                handlePlay={handlePlay}
-              />
+              {isPodcastOrLecture ? (
+                <Episodes
+                  series={series}
+                  changeBook={changeBook}
+                  currentBookId={currentBookId}
+                  currentTime={currentTime}
+                  duration={duration}
+                  handlePlay={handlePlay}
+                />
+              ) : (
+                <Chapters
+                  currentChapterNumber={currentChapterNumber}
+                  changeChapter={changeChapter}
+                  currentTime={currentTime}
+                  duration={duration}
+                  files={book.files}
+                  handlePlay={handlePlay}
+                />
+              )}
             </DropdownWrapper>
           </DropdownContainer>
         </Dropdown>
@@ -147,6 +141,8 @@ function TableOfContents({
 
 const mapStateToProps = ({
   book,
+  series,
+  isPodcastOrLecture,
   currentChapterNumber,
   isTableOfContentsShow,
   currentTime,
@@ -154,6 +150,8 @@ const mapStateToProps = ({
   isFetched,
 }) => ({
   book,
+  series,
+  isPodcastOrLecture,
   currentChapterNumber,
   isTableOfContentsShow,
   currentTime,

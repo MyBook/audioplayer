@@ -142,9 +142,25 @@ export const init = (isFreeFragment: boolean, urls) => async (
   dispatch({ type: "INIT" });
 };
 
-export const getBookFromServer = (bookId: number, urls, bookAdaptor) => async (
-  dispatch: Function,
-) => {
+const getSeries = (book, urls, seriesAdaptor) => async (dispatch, getState) => {
+  const series = seriesAdaptor(book.series[0].series);
+  const { id: seriesId } = series;
+  const { url } = urls.getSeries(book.id, seriesId);
+
+  const { results: books } = await doFetch({ url });
+  console.log(series);
+  dispatch({
+    type: "GET_SERIES",
+    payload: { ...series, books },
+  });
+};
+
+export const getBook = (
+  bookId: number,
+  urls,
+  bookAdaptor,
+  seriesAdaptor,
+) => async (dispatch: Function) => {
   dispatch({ type: "START_FETCHING" });
 
   const { url, version } = urls.getBook(bookId);
@@ -153,6 +169,15 @@ export const getBookFromServer = (bookId: number, urls, bookAdaptor) => async (
     version,
   });
   const book = bookAdaptor(bookRaw);
+  let isPodcastOrLecture = false;
 
-  dispatch({ type: "GET_BOOK_FROM_SERVER", payload: book });
+  if (book.type === "podcast" || book.type === "lecture") {
+    isPodcastOrLecture = true;
+    await dispatch(getSeries(book, urls, seriesAdaptor));
+  }
+
+  dispatch({
+    type: "GET_BOOK",
+    payload: { book, isPodcastOrLecture },
+  });
 };
