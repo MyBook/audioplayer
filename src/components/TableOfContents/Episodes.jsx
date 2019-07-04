@@ -23,14 +23,12 @@ export default function Episodes(props) {
 
   const episodes = series.books.map(({ name, id, seconds }, i) => {
     const isCurrentBook = id === currentBookId;
-
     return (
       <Chapter
         key={i}
         active={isCurrentBook}
         onClick={async () => {
           await changeBook(id);
-          await handlePlay();
         }}
       >
         {truncate(name, isCurrentBook ? shortHeaderSize : longHeaderSize)}

@@ -16,45 +16,19 @@ import { changePlaybackRate } from "actions/playbackRate";
 
 import tracking from "components/utils/tracking";
 
-function addKeyboardEventListeners({ dispatch, getState, urls }) {
-  keyboardEventsListeners({
-    triggerPlay: () => {
-      const { isPlaying } = getState();
-      if (isPlaying) {
-        dispatch(handlePause(urls));
-        tracking("onKeyPause");
-      } else {
-        dispatch(handlePlay());
-        tracking("onKeyPlay");
-      }
-    },
-    handleForward: () => {
-      dispatch(
-        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount),
-      );
-      tracking("onKeyForward");
-    },
-    handleBackward: () => {
-      dispatch(
-        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount),
-      );
-      tracking("onKeyBackward");
-    },
-    handleMute: () => {
-      const { volume } = getState();
-      dispatch(changeVolume(volume === 0 ? 1 : 0));
-      tracking("onKeyMute");
-    },
-  });
-}
-
-function addPlayerEventListeners({
-  player,
-  dispatch,
-  getState,
-  isFreeFragment,
+export const init = (
+  isFreeFragment: boolean,
   urls,
-}) {
+  changeBook: Function,
+) => async (dispatch: Function, getState: Function) => {
+  const { player } = getState();
+
+  await dispatch(setFreeFragment(isFreeFragment));
+
+  const { isFreeFragment: _isFreeFragment, book } = getState();
+  const source = _isFreeFragment ? book.preview : book.files[0];
+  player.src = source.absolute_url;
+
   player.addEventListener("loadedmetadata", async () => {
     dispatch({
       type: "LOADED_META_DATA",
@@ -97,18 +71,33 @@ function addPlayerEventListeners({
 
   if (!isFreeFragment) {
     player.addEventListener("ended", async () => {
-      const { currentChapterNumber, book } = getState();
-      const newChapter =
-        book.files.length > currentChapterNumber + 1
-          ? currentChapterNumber + 1
-          : 0;
-      await dispatch(changeChapter(newChapter));
-      await dispatch(handlePlay());
+      const {
+        currentChapterNumber,
+        book: currentBook,
+        isPodcastOrLecture,
+        series,
+      } = getState();
+
+      if (isPodcastOrLecture) {
+        const seriesBooks = series.books;
+        const currentBookIndex = seriesBooks.findIndex(
+          book => currentBook.id === book.id,
+        );
+
+        if (currentBookIndex !== -1 && seriesBooks[currentBookIndex + 1]) {
+          changeBook(seriesBooks[currentBookIndex + 1].id);
+        }
+      } else {
+        const newChapter =
+          currentBook.files.length > currentChapterNumber + 1
+            ? currentChapterNumber + 1
+            : 0;
+        await dispatch(changeChapter(newChapter));
+        await dispatch(handlePlay());
+      }
     });
   }
-}
 
-function setLocalOptions({ isFreeFragment, dispatch }) {
   if (!isFreeFragment) {
     const localVolume = localStorage.getItem("volume");
     const localPlaybackRate = localStorage.getItem("playbackRate");
@@ -121,23 +110,36 @@ function setLocalOptions({ isFreeFragment, dispatch }) {
       dispatch(changePlaybackRate(+localPlaybackRate));
     }
   }
-}
 
-export const init = (isFreeFragment: boolean, urls) => async (
-  dispatch: Function,
-  getState: Function,
-) => {
-  const { player } = getState();
-
-  await dispatch(setFreeFragment(isFreeFragment));
-
-  const { isFreeFragment: _isFreeFragment, book } = getState();
-  const source = _isFreeFragment ? book.preview : book.files[0];
-  player.src = source.url;
-
-  setLocalOptions({ dispatch, isFreeFragment });
-  addPlayerEventListeners({ dispatch, getState, urls, player, isFreeFragment });
-  addKeyboardEventListeners({ dispatch, getState, urls });
+  keyboardEventsListeners({
+    triggerPlay: () => {
+      const { isPlaying } = getState();
+      if (isPlaying) {
+        dispatch(handlePause(urls));
+        tracking("onKeyPause");
+      } else {
+        dispatch(handlePlay());
+        tracking("onKeyPlay");
+      }
+    },
+    handleForward: () => {
+      dispatch(
+        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount),
+      );
+      tracking("onKeyForward");
+    },
+    handleBackward: () => {
+      dispatch(
+        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount),
+      );
+      tracking("onKeyBackward");
+    },
+    handleMute: () => {
+      const { volume } = getState();
+      dispatch(changeVolume(volume === 0 ? 1 : 0));
+      tracking("onKeyMute");
+    },
+  });
 
   dispatch({ type: "INIT" });
 };

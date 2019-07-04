@@ -101,7 +101,8 @@ function TableOfContents({
                   </TypeWrapper>
                   <TypeWrapper>
                     {series.bookCount}{" "}
-                    {plural(series.bookCount, ...episodesPlural)}
+                    {isPodcastOrLecture &&
+                      plural(series.bookCount, ...episodesPlural)}
                   </TypeWrapper>
                   <Link
                     to={isPodcastOrLecture ? series.url : bookLink}
@@ -123,7 +124,6 @@ function TableOfContents({
                   currentBookId={currentBookId}
                   currentTime={currentTime}
                   duration={duration}
-                  handlePlay={handlePlay}
                 />
               ) : (
                 <Chapters

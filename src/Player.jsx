@@ -88,10 +88,11 @@ class Player extends PureComponent<Props> {
       urls,
       bookAdaptor,
       seriesAdaptor,
+      changeBook,
     } = this.props;
 
     await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
-    await init(isFreeFragment, urls);
+    await init(isFreeFragment, urls, changeBook);
     await getAutoBookmarkFromServer(bookId, urls);
   };
 
