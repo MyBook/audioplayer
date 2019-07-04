@@ -19,9 +19,15 @@ type Props = {
 };
 
 export default function(props: Props) {
-  const { currentChapterNumber, book = {}, isFetched, Link } = props;
+  const {
+    currentChapterNumber,
+    book = {},
+    isFetched,
+    Link,
+    isPodcastOrLecture,
+  } = props;
   const { name, bookLink, default_image } = book;
-  const maxBookTitleLength = 35;
+  const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
 
   if (isFetched) {
     return (
@@ -36,7 +42,7 @@ export default function(props: Props) {
           <Link to={bookLink} className="clear-links-style">
             <Title>{truncate(name, maxBookTitleLength)}</Title>
           </Link>
-          Глава {currentChapterNumber + 1}
+          {!isPodcastOrLecture && <>Глава {currentChapterNumber + 1}</>}
         </div>
       </BookInfoWrapper>
     );

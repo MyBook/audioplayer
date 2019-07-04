@@ -133,6 +133,7 @@ class Player extends PureComponent<Props> {
       urls,
       hidePlayer,
       changeBook,
+      isPodcastOrLecture,
     } = this.props;
 
     return (
@@ -165,6 +166,7 @@ class Player extends PureComponent<Props> {
                   currentChapterNumber={currentChapterNumber}
                   isFetched={isFetched}
                   Link={Link}
+                  isPodcastOrLecture={isPodcastOrLecture}
                 />
 
                 <IconsWrapper>
@@ -212,6 +214,7 @@ class Player extends PureComponent<Props> {
 
 const mapStateToProps = ({
   book,
+  isPodcastOrLecture,
   isFetched,
   isFetching,
   isPlaying,
@@ -225,6 +228,7 @@ const mapStateToProps = ({
   isBookmarksConflictNotificationShow,
 }) => ({
   book,
+  isPodcastOrLecture,
   isFetched,
   isFetching,
   isPlaying,

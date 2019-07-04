@@ -26,6 +26,7 @@ export const CoverWrapper = styled.span`
 
 export const Title = styled.span`
   font-size: 14px;
+  line-height: 15px;
   display: block;
   text-decoration: none;
   hyphens: auto;

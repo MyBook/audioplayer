@@ -22,6 +22,7 @@ import TypeIcons from "components/TypeIcons";
 import PowerOff from "components/Icons/PowerOff";
 import Chapters from "components/TableOfContents/Chapters";
 import Episodes from "components/TableOfContents/Episodes";
+import plural, { episodesPlural } from "utils/plural";
 
 function TableOfContents({
   isTableOfContentsShow,
@@ -97,6 +98,10 @@ function TableOfContents({
                         lecture: "лекция",
                       })[type]
                     }
+                  </TypeWrapper>
+                  <TypeWrapper>
+                    {series.bookCount}{" "}
+                    {plural(series.bookCount, ...episodesPlural)}
                   </TypeWrapper>
                   <Link
                     to={isPodcastOrLecture ? series.url : bookLink}
