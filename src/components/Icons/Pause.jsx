@@ -9,7 +9,11 @@ type Props = {
 
 export default memo<Props>(function({ onClick, isFetched }) {
   return (
-    <PlayPauseIcon onClick={onClick} isFetched={isFetched}>
+    <PlayPauseIcon
+      onClick={onClick}
+      isFetched={isFetched}
+      className="jest-player-pause-button"
+    >
       <svg
         width="48"
         height="48"

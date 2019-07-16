@@ -21,7 +21,11 @@ export default function({
   isFetched: Boolean,
 }) {
   return (
-    <Icon onClick={onClick} isFetched={isFetched}>
+    <Icon
+      onClick={onClick}
+      className="jest-player-power-off"
+      isFetched={isFetched}
+    >
       <svg
         width="32"
         height="32"

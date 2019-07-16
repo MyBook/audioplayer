@@ -39,6 +39,7 @@ function Chapters(props) {
     return (
       <Chapter
         key={i}
+        className={`jest-player-chapter-${i + 1}`}
         active={currentChapterNumber === i}
         onClick={async () => {
           await changeChapter(i);
@@ -80,7 +81,7 @@ function TableOfContents({
       onClick={tableOfContentsShowTrigger}
       isActive={isTableOfContentsShow}
       isFetched={isFetched}
-      className="dropdown-trigger-button"
+      className="dropdown-trigger-button jest-player-table-of-contents-button"
     />
   );
 
