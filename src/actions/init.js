@@ -150,7 +150,7 @@ const getSeries = (book, urls, seriesAdaptor) => async (dispatch, getState) => {
   const { url } = urls.getSeries(book.id, seriesId);
 
   const { results: books } = await doFetch({ url });
-  console.log(series);
+
   dispatch({
     type: "GET_SERIES",
     payload: { ...series, books },
