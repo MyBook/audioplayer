@@ -16,18 +16,45 @@ import { changePlaybackRate } from "actions/playbackRate";
 
 import tracking from "components/utils/tracking";
 
-export const init = (isFreeFragment: boolean, urls) => async (
-  dispatch: Function,
-  getState: Function,
-) => {
-  const { player } = getState();
+function addKeyboardEventListeners({ dispatch, getState, urls }) {
+  keyboardEventsListeners({
+    triggerPlay: () => {
+      const { isPlaying } = getState();
+      if (isPlaying) {
+        dispatch(handlePause(urls));
+        tracking("onKeyPause");
+      } else {
+        dispatch(handlePlay());
+        tracking("onKeyPlay");
+      }
+    },
+    handleForward: () => {
+      dispatch(
+        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount),
+      );
+      tracking("onKeyForward");
+    },
+    handleBackward: () => {
+      dispatch(
+        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount),
+      );
+      tracking("onKeyBackward");
+    },
+    handleMute: () => {
+      const { volume } = getState();
+      dispatch(changeVolume(volume === 0 ? 1 : 0));
+      tracking("onKeyMute");
+    },
+  });
+}
 
-  await dispatch(setFreeFragment(isFreeFragment));
-
-  const { isFreeFragment: _isFreeFragment, book } = getState();
-  const source = _isFreeFragment ? book.preview : book.files[0];
-  player.src = source.absolute_url;
-
+function addPlayerEventListeners({
+  player,
+  dispatch,
+  getState,
+  isFreeFragment,
+  urls,
+}) {
   player.addEventListener("loadedmetadata", async () => {
     dispatch({
       type: "LOADED_META_DATA",
@@ -79,7 +106,9 @@ export const init = (isFreeFragment: boolean, urls) => async (
       await dispatch(handlePlay());
     });
   }
+}
 
+function setLocalOptions({ isFreeFragment, dispatch }) {
   if (!isFreeFragment) {
     const localVolume = localStorage.getItem("volume");
     const localPlaybackRate = localStorage.getItem("playbackRate");
@@ -92,36 +121,23 @@ export const init = (isFreeFragment: boolean, urls) => async (
       dispatch(changePlaybackRate(+localPlaybackRate));
     }
   }
+}
 
-  keyboardEventsListeners({
-    triggerPlay: () => {
-      const { isPlaying } = getState();
-      if (isPlaying) {
-        dispatch(handlePause(urls));
-        tracking("onKeyPause");
-      } else {
-        dispatch(handlePlay());
-        tracking("onKeyPlay");
-      }
-    },
-    handleForward: () => {
-      dispatch(
-        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount),
-      );
-      tracking("onKeyForward");
-    },
-    handleBackward: () => {
-      dispatch(
-        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount),
-      );
-      tracking("onKeyBackward");
-    },
-    handleMute: () => {
-      const { volume } = getState();
-      dispatch(changeVolume(volume === 0 ? 1 : 0));
-      tracking("onKeyMute");
-    },
-  });
+export const init = (isFreeFragment: boolean, urls) => async (
+  dispatch: Function,
+  getState: Function,
+) => {
+  const { player } = getState();
+
+  await dispatch(setFreeFragment(isFreeFragment));
+
+  const { isFreeFragment: _isFreeFragment, book } = getState();
+  const source = _isFreeFragment ? book.preview : book.files[0];
+  player.src = source.url;
+
+  setLocalOptions({ dispatch, isFreeFragment });
+  addPlayerEventListeners({ dispatch, getState, urls, player, isFreeFragment });
+  addKeyboardEventListeners({ dispatch, getState, urls });
 
   dispatch({ type: "INIT" });
 };
