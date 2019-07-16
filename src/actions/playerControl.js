@@ -29,16 +29,20 @@ export const handlePlay = () => async (
   getState: Function,
 ) => {
   const { player } = getState();
-  player.play();
+  const playPromise = player.play();
 
-  tracking("onPlay");
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      tracking("onPlay");
 
-  //TODO(victorkolb): надо правильные фавиконки
-  // document.querySelectorAll(".favicon").forEach(el => {
-  //   if (!(el instanceof HTMLLinkElement)) return;
-  //   el.href = "/static/web/images/player/play.png";
-  // });
-  dispatch({ type: "PLAY" });
+      //TODO(victorkolb): надо правильные фавиконки
+      // document.querySelectorAll(".favicon").forEach(el => {
+      //   if (!(el instanceof HTMLLinkElement)) return;
+      //   el.href = "/static/web/images/player/play.png";
+      // });
+      dispatch({ type: "PLAY" });
+    });
+  }
 };
 
 export const handleTimeUpdate = (time: number) => async (
