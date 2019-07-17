@@ -57,7 +57,7 @@ function Chapters(props) {
   });
 
   return (
-    <PerfectScrollbar>
+    <PerfectScrollbar className="table-of-contents">
       <TableOfContentsWrapper>{chapters}</TableOfContentsWrapper>
     </PerfectScrollbar>
   );

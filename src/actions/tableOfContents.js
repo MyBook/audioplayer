@@ -34,6 +34,7 @@ export const changeChapter = (fileNumber: number) => async (
     player.src = url;
     player.volume = volume;
     player.playbackRate = playbackRate;
+    player.currentTime = 0;
 
     dispatch({
       type: "CHANGE_SOURCE",

@@ -71,10 +71,15 @@ export const CoverWrapper = styled(CoverWrapperStyled)`
 export const DropdownWrapper = styled.div`
   position: relative;
   background: white;
-  padding: 16px 16px 0;
+  padding: 16px 0 0;
   box-sizing: border-box;
   z-index: 1;
   border-radius: ${props => props.theme.borderRadius};
+  overflow: hidden;
+
+  .table-of-contents {
+    padding: 0 16px;
+  }
 `;
 
 export const DropdownContainer = styled.div`
@@ -114,7 +119,7 @@ export const DropdownHeader = styled.div`
   font-size: 16px;
   position: relative;
   border-bottom: 1px solid #f6f6f6;
-  padding-bottom: 16px;
+  padding: 0 16px 16px;
   display: flex;
   align-items: flex-start;
 
