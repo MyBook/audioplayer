@@ -40,10 +40,19 @@ export const getAutoBookmarkFromServer = (bookId: number, urls) => async (
   }
 
   const { url, version } = urls.getAutoBookmark(bookId);
-  const result = await doFetch({
-    url,
-    version,
-  });
+  let result = {};
+  try {
+    result = await doFetch({
+      url,
+      version,
+    });
+  } catch (e) {
+    if (e === "404") {
+      console.info("Автозакладка не найдена");
+    } else {
+      console.error(e);
+    }
+  }
 
   if (!result.file) {
     return;
