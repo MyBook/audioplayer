@@ -45,7 +45,7 @@ function TableOfContents({
       onClick={tableOfContentsShowTrigger}
       isActive={isTableOfContentsShow}
       isFetched={isFetched}
-      className="dropdown-trigger-button"
+      className="dropdown-trigger-button jest-player-table-of-contents-button"
     />
   );
 

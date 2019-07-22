@@ -21,6 +21,7 @@ export default function Chapters(props) {
     return (
       <Chapter
         key={i}
+        className={`jest-player-chapter-${i + 1}`}
         active={currentChapterNumber === i}
         onClick={async () => {
           await changeChapter(i);
@@ -38,7 +39,7 @@ export default function Chapters(props) {
   });
 
   return (
-    <PerfectScrollbar>
+    <PerfectScrollbar className="table-of-contents">
       <TableOfContentsWrapper>{chapters}</TableOfContentsWrapper>
     </PerfectScrollbar>
   );

@@ -9,14 +9,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
 
 export default function Episodes(props) {
-  const {
-    series,
-    currentBookId,
-    changeBook,
-    handlePlay,
-    currentTime,
-    duration,
-  } = props;
+  const { series, currentBookId, changeBook, currentTime, duration } = props;
 
   const longHeaderSize = 30;
   const shortHeaderSize = 17;
@@ -26,6 +19,7 @@ export default function Episodes(props) {
     return (
       <Chapter
         key={i}
+        className={`jest-player-chapter-${i + 1}`}
         active={isCurrentBook}
         onClick={async () => {
           await changeBook(id);
@@ -42,7 +36,7 @@ export default function Episodes(props) {
   });
 
   return (
-    <PerfectScrollbar>
+    <PerfectScrollbar className="table-of-contents">
       <TableOfContentsWrapper>{episodes}</TableOfContentsWrapper>
     </PerfectScrollbar>
   );
