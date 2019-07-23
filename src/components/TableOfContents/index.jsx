@@ -99,11 +99,12 @@ function TableOfContents({
                       })[type]
                     }
                   </TypeWrapper>
-                  <TypeWrapper>
-                    {series.bookCount}{" "}
-                    {isPodcastOrLecture &&
-                      plural(series.bookCount, ...episodesPlural)}
-                  </TypeWrapper>
+                  {isPodcastOrLecture && (
+                    <TypeWrapper>
+                      {series.bookCount} plural(series.bookCount,
+                      ...episodesPlural)}
+                    </TypeWrapper>
+                  )}
                   <Link
                     to={isPodcastOrLecture ? series.url : bookLink}
                     className="clear-links-style"
