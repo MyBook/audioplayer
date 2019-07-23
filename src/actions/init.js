@@ -54,6 +54,7 @@ function addPlayerEventListeners({
   getState,
   isFreeFragment,
   urls,
+  changeBook,
 }) {
   player.addEventListener("loadedmetadata", async () => {
     dispatch({
@@ -97,13 +98,30 @@ function addPlayerEventListeners({
 
   if (!isFreeFragment) {
     player.addEventListener("ended", async () => {
-      const { currentChapterNumber, book } = getState();
-      const newChapter =
-        book.files.length > currentChapterNumber + 1
-          ? currentChapterNumber + 1
-          : 0;
-      await dispatch(changeChapter(newChapter));
-      await dispatch(handlePlay());
+      const {
+        currentChapterNumber,
+        book: currentBook,
+        isPodcastOrLecture,
+        series,
+      } = getState();
+
+      if (isPodcastOrLecture) {
+        const seriesBooks = series.books;
+        const currentBookIndex = seriesBooks.findIndex(
+          book => currentBook.id === book.id,
+        );
+
+        if (currentBookIndex !== -1 && seriesBooks[currentBookIndex + 1]) {
+          changeBook(seriesBooks[currentBookIndex + 1].id);
+        }
+      } else {
+        const newChapter =
+          currentBook.files.length > currentChapterNumber + 1
+            ? currentChapterNumber + 1
+            : 0;
+        await dispatch(changeChapter(newChapter));
+        await dispatch(handlePlay());
+      }
     });
   }
 }
@@ -123,10 +141,11 @@ function setLocalOptions({ isFreeFragment, dispatch }) {
   }
 }
 
-export const init = (isFreeFragment: boolean, urls) => async (
-  dispatch: Function,
-  getState: Function,
-) => {
+export const init = (
+  isFreeFragment: boolean,
+  urls,
+  changeBook: Function,
+) => async (dispatch: Function, getState: Function) => {
   const { player } = getState();
 
   await dispatch(setFreeFragment(isFreeFragment));
@@ -142,9 +161,25 @@ export const init = (isFreeFragment: boolean, urls) => async (
   dispatch({ type: "INIT" });
 };
 
-export const getBookFromServer = (bookId: number, urls, bookAdaptor) => async (
-  dispatch: Function,
-) => {
+const getSeries = (book, urls, seriesAdaptor) => async (dispatch, getState) => {
+  const series = seriesAdaptor(book.series[0].series);
+  const { id: seriesId } = series;
+  const { url } = urls.getSeries(book.id, seriesId);
+
+  const { results: books } = await doFetch({ url });
+
+  dispatch({
+    type: "GET_SERIES",
+    payload: { ...series, books },
+  });
+};
+
+export const getBook = (
+  bookId: number,
+  urls,
+  bookAdaptor,
+  seriesAdaptor,
+) => async (dispatch: Function) => {
   dispatch({ type: "START_FETCHING" });
 
   const { url, version } = urls.getBook(bookId);
@@ -153,6 +188,15 @@ export const getBookFromServer = (bookId: number, urls, bookAdaptor) => async (
     version,
   });
   const book = bookAdaptor(bookRaw);
+  let isPodcastOrLecture = false;
 
-  dispatch({ type: "GET_BOOK_FROM_SERVER", payload: book });
+  if (book.type === "podcast" || book.type === "lecture") {
+    isPodcastOrLecture = true;
+    await dispatch(getSeries(book, urls, seriesAdaptor));
+  }
+
+  dispatch({
+    type: "GET_BOOK",
+    payload: { book, isPodcastOrLecture },
+  });
 };

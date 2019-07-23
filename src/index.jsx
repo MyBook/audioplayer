@@ -3,8 +3,8 @@ import { applyMiddleware, createStore, compose } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import reducer from "reducer";
-import Player from "Player";
 import { createLogger } from "redux-logger";
+import Player from "Player";
 
 const logger = createLogger({
   collapsed: true,

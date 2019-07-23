@@ -38,14 +38,16 @@ type Props = {
   changeBook: Function,
   init: Function,
   getAutoBookmarkFromServer: Function,
-  getBookFromServer: Function,
+  getBook: Function,
   handleTimeUpdate: Function,
   handlePlay: Function,
   handlePause: Function,
+  resetPlayer: Function,
   applyServerBookmark: Function,
   changeVolume: Function,
   muteTrigger: Function,
   bookAdaptor: Function,
+  seriesAdaptor: Function,
   hidePlayer: Function,
   currentTime: number,
   duration: number,
@@ -69,10 +71,13 @@ class Player extends PureComponent<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    const { bookId, changeBook, isFreeFragment } = this.props;
+    const { bookId, resetPlayer, isFreeFragment } = this.props;
 
-    if (bookId !== prevProps.bookId) {
-      changeBook();
+    if (
+      bookId !== prevProps.bookId ||
+      isFreeFragment !== prevProps.isFreeFragment
+    ) {
+      resetPlayer();
       this.init(isFreeFragment);
     }
   }
@@ -81,14 +86,16 @@ class Player extends PureComponent<Props> {
     const {
       init,
       getAutoBookmarkFromServer,
-      getBookFromServer,
+      getBook,
       bookId,
       urls,
       bookAdaptor,
+      seriesAdaptor,
+      changeBook,
     } = this.props;
 
-    await getBookFromServer(bookId, urls, bookAdaptor);
-    await init(isFreeFragment, urls);
+    await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
+    await init(isFreeFragment, urls, changeBook);
     await getAutoBookmarkFromServer(bookId, urls);
   };
 
@@ -129,6 +136,8 @@ class Player extends PureComponent<Props> {
       Link,
       urls,
       hidePlayer,
+      changeBook,
+      isPodcastOrLecture,
     } = this.props;
 
     return (
@@ -161,11 +170,16 @@ class Player extends PureComponent<Props> {
                   currentChapterNumber={currentChapterNumber}
                   isFetched={isFetched}
                   Link={Link}
+                  isPodcastOrLecture={isPodcastOrLecture}
                 />
 
                 <IconsWrapper>
                   {!isFreeFragment ? (
-                    <TableOfContents Link={Link} hidePlayer={hidePlayer} />
+                    <TableOfContents
+                      Link={Link}
+                      hidePlayer={hidePlayer}
+                      changeBook={changeBook}
+                    />
                   ) : (
                     <PowerOffIconWrapper>
                       <PowerOff onClick={hidePlayer} isFetched={isFetched} />
@@ -204,6 +218,7 @@ class Player extends PureComponent<Props> {
 
 const mapStateToProps = ({
   book,
+  isPodcastOrLecture,
   isFetched,
   isFetching,
   isPlaying,
@@ -217,6 +232,7 @@ const mapStateToProps = ({
   isBookmarksConflictNotificationShow,
 }) => ({
   book,
+  isPodcastOrLecture,
   isFetched,
   isFetching,
   isPlaying,
