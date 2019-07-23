@@ -73,7 +73,10 @@ class Player extends PureComponent<Props> {
   componentDidUpdate(prevProps) {
     const { bookId, resetPlayer, isFreeFragment } = this.props;
 
-    if (bookId !== prevProps.bookId) {
+    if (
+      bookId !== prevProps.bookId ||
+      isFreeFragment !== prevProps.isFreeFragment
+    ) {
       resetPlayer();
       this.init(isFreeFragment);
     }
