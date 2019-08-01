@@ -22,7 +22,7 @@ import TypeIcons from "components/TypeIcons";
 import PowerOff from "components/Icons/PowerOff";
 import Chapters from "components/TableOfContents/Chapters";
 import Episodes from "components/TableOfContents/Episodes";
-import plural, { episodesPlural } from "utils/plural";
+import tracking from "components/utils/tracking";
 
 function TableOfContents({
   isTableOfContentsShow,
@@ -70,6 +70,7 @@ function TableOfContents({
             <PowerOffWrapper
               onClick={() => {
                 tableOfContentsShowTrigger();
+                tracking("onTurnOffOnTableOfContent");
                 hidePlayer();
               }}
             >

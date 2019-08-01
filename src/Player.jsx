@@ -27,6 +27,7 @@ import { defaultForwardSecondsCount } from "utils/playerConstants";
 import type { Book, TrialMessageProps, styles } from "utils/playerConstants";
 import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
 import { Wrapper as PlaybackRateWrapper } from "components/PlaybackRateControl/index.styled";
+import tracking from "components/utils/tracking";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,
@@ -182,7 +183,13 @@ class Player extends PureComponent<Props> {
                     />
                   ) : (
                     <PowerOffIconWrapper>
-                      <PowerOff onClick={hidePlayer} isFetched={isFetched} />
+                      <PowerOff
+                        onClick={() => {
+                          tracking("onTurnOffOnTrial");
+                          hidePlayer();
+                        }}
+                        isFetched={isFetched}
+                      />
                     </PowerOffIconWrapper>
                   )}
                   <BackwardIcon
