@@ -7,9 +7,19 @@ type Functions = {
   handleMute: Function,
 };
 
+function handleKeydown(e) {
+  if (window.keydownFunctionsMapping[e.key]) {
+    if (e.target.nodeName === "INPUT" && e.target.type === "text") {
+      return;
+    }
+    e.preventDefault();
+    window.keydownFunctionsMapping[e.key]();
+  }
+}
+
 export default function(functions: Functions) {
   const { triggerPlay, handleForward, handleBackward, handleMute } = functions;
-  const mapping = {
+  window.keydownFunctionsMapping = {
     " ": triggerPlay,
     ArrowRight: handleForward,
     ArrowLeft: handleBackward,
@@ -17,13 +27,9 @@ export default function(functions: Functions) {
     m: handleMute,
   };
 
-  window.addEventListener("keydown", e => {
-    if (mapping[e.key]) {
-      if (e.target.nodeName === "INPUT" && e.target.type === "text") {
-        return;
-      }
-      e.preventDefault();
-      mapping[e.key]();
-    }
-  });
+  window.addEventListener("keydown", handleKeydown);
+}
+
+export function removeEventsListeners() {
+  window.removeEventListener("keydown", handleKeydown);
 }

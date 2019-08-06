@@ -99,7 +99,7 @@ export default class Timeline extends PureComponent<Props> {
           {timeFormat(currentTime)}
         </TimeCurrent>
         {isFetched ? (
-          <TimeLineWrapper>
+          <TimeLineWrapper isFetched={isFetched}>
             <Wrapper ref={this.wrapperRef}>
               <ScrubArea
                 onClick={this.changeValue}

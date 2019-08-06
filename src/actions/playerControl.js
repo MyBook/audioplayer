@@ -32,16 +32,18 @@ export const handlePlay = () => async (
   const playPromise = player.play();
 
   if (playPromise !== undefined) {
-    playPromise.then(() => {
-      tracking("onPlay");
+    playPromise
+      .then(() => {
+        tracking("onPlay");
 
-      //TODO(victorkolb): надо правильные фавиконки
-      // document.querySelectorAll(".favicon").forEach(el => {
-      //   if (!(el instanceof HTMLLinkElement)) return;
-      //   el.href = "/static/web/images/player/play.png";
-      // });
-      dispatch({ type: "PLAY" });
-    });
+        //TODO(victorkolb): надо правильные фавиконки
+        // document.querySelectorAll(".favicon").forEach(el => {
+        //   if (!(el instanceof HTMLLinkElement)) return;
+        //   el.href = "/static/web/images/player/play.png";
+        // });
+        dispatch({ type: "PLAY" });
+      })
+      .catch(e => console.error(e));
   }
 };
 
@@ -67,12 +69,8 @@ export const setFreeFragment = (isFreeFragment: boolean) => async (
   });
 };
 
-export const resetPlayer = () => async (
-  dispatch: Function,
-  getState: Function,
-) => {
-  const { player } = getState();
-  player.pause();
+export const resetPlayer = urls => async (dispatch: Function) => {
+  dispatch(handlePause(urls));
 
   dispatch({
     type: "RESET_PLAYER",

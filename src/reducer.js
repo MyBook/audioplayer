@@ -41,8 +41,6 @@ export default function reducer(state = initialState, { type, payload }) {
         ...state,
         book: payload.book,
         isPodcastOrLecture: payload.isPodcastOrLecture,
-        isFetched: true,
-        isFetching: false,
       };
 
     case "GET_SERIES":
@@ -51,12 +49,21 @@ export default function reducer(state = initialState, { type, payload }) {
         series: payload,
       };
 
+    case "CAN_PLAY":
+      return {
+        ...state,
+        isFetched: true,
+        isFetching: false,
+      };
+
     case "CHANGE_SOURCE":
       return {
         ...state,
         src: payload.src,
         currentChapterNumber: payload.currentChapterNumber,
         duration: 0,
+        isFetched: false,
+        isFetching: true,
       };
 
     case "PLAY":

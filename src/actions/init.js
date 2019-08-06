@@ -65,7 +65,7 @@ function addPlayerEventListeners({
 
   player.addEventListener("canplay", async () => {
     const { isNeedToTimeUpdate, currentTime } = getState();
-
+    await dispatch({ type: "CAN_PLAY" });
     if (isNeedToTimeUpdate) {
       await dispatch(handleTimeUpdate(currentTime));
       await dispatch({ type: "IS_NO_NEED_TO_TIME_UPDATE" });

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Progress as ProgressStyled } from "components/Sliders/index.styled";
 
 export const width = 940;
@@ -62,17 +62,21 @@ export const TimeLineWrapper = styled.div`
   border-radius: 4px;
   transition: height 0.2s;
 
-  &:hover {
-    ${Picker} {
-      opacity: 1;
-      width: 16px;
-      height: 16px;
-    }
+  ${props =>
+    props.isFetched &&
+    css`
+      &:hover {
+        ${Picker} {
+          opacity: 1;
+          width: 16px;
+          height: 16px;
+        }
 
-    ${Wrapper} {
-      height: 8px;
-    }
-  }
+        ${Wrapper} {
+          height: 8px;
+        }
+      }
+    `}
 
   @media (max-width: 940px) {
     width: 600px;

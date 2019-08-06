@@ -28,6 +28,7 @@ import type { Book, TrialMessageProps, styles } from "utils/playerConstants";
 import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
 import { Wrapper as PlaybackRateWrapper } from "components/PlaybackRateControl/index.styled";
 import tracking from "components/utils/tracking";
+import { removeEventsListeners } from "components/utils/keyboardEventsListeners";
 
 type Props = {
   TrialMessage: ComponentType<TrialMessageProps>,
@@ -57,6 +58,7 @@ type Props = {
   book: Book,
   styles: styles,
   urls: {},
+  isPodcastOrLecture: boolean,
 };
 
 class Player extends PureComponent<Props> {
@@ -66,19 +68,20 @@ class Player extends PureComponent<Props> {
   }
 
   async componentWillUnmount() {
-    const { handlePause, urls } = this.props;
+    const { resetPlayer, urls } = this.props;
 
-    handlePause(urls);
+    removeEventsListeners();
+    resetPlayer(urls);
   }
 
   componentDidUpdate(prevProps) {
-    const { bookId, resetPlayer, isFreeFragment } = this.props;
+    const { bookId, resetPlayer, urls, isFreeFragment } = this.props;
 
     if (
       bookId !== prevProps.bookId ||
       isFreeFragment !== prevProps.isFreeFragment
     ) {
-      resetPlayer();
+      resetPlayer(urls);
       this.init(isFreeFragment);
     }
   }
@@ -93,11 +96,16 @@ class Player extends PureComponent<Props> {
       bookAdaptor,
       seriesAdaptor,
       changeBook,
+      handlePlay,
     } = this.props;
-
-    await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
-    await init(isFreeFragment, urls, changeBook);
-    await getAutoBookmarkFromServer(bookId, urls);
+    try {
+      await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
+      await init(isFreeFragment, urls, changeBook);
+      await getAutoBookmarkFromServer(bookId, urls);
+      await handlePlay();
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   handleBackward = () => {
