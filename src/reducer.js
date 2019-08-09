@@ -20,6 +20,7 @@ const initialState = {
   statisticsSeconds: 0,
   isFreeFragment: true,
   isNeedToTimeUpdate: false,
+  is404Error: false,
 };
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -155,6 +156,12 @@ export default function reducer(state = initialState, { type, payload }) {
       return {
         ...state,
         isNeedToTimeUpdate: false,
+      };
+
+    case "SET_404_ERROR":
+      return {
+        ...state,
+        is404Error: true,
       };
 
     case "RESET_PLAYER":

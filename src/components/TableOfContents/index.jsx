@@ -10,19 +10,15 @@ import {
   DropDownIconWrapper,
   DropdownWrapper,
   TypeWrapper,
-  PowerOffWrapper,
 } from "components/TableOfContents/index.styled";
 import Dropdown from "components/Dropdown";
 import ChaptersIcon from "components/Icons/Chapters";
 import { connect } from "react-redux";
 import { changeChapter, handlePlay, tableOfContentsShowTrigger } from "actions";
 import truncate from "utils/truncate";
-
 import TypeIcons from "components/TypeIcons";
-import PowerOff from "components/Icons/PowerOff";
 import Chapters from "components/TableOfContents/Chapters";
 import Episodes from "components/TableOfContents/Episodes";
-import tracking from "components/utils/tracking";
 
 function TableOfContents({
   isTableOfContentsShow,
@@ -35,7 +31,6 @@ function TableOfContents({
   duration,
   isFetched,
   Link,
-  hidePlayer,
   series,
   isPodcastOrLecture,
   changeBook,
@@ -67,15 +62,6 @@ function TableOfContents({
       {isTableOfContentsShow && (
         <Dropdown trigger={tableOfContentsShowTrigger}>
           <DropdownContainer>
-            <PowerOffWrapper
-              onClick={() => {
-                tableOfContentsShowTrigger();
-                tracking("onTurnOffOnTableOfContent");
-                hidePlayer();
-              }}
-            >
-              <PowerOff isFetched={isFetched} /> Выключить плеер
-            </PowerOffWrapper>
             <DropdownWrapper>
               <DropdownHeader>
                 <Link

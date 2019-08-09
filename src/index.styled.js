@@ -23,11 +23,7 @@ export const PlayerWrapper = styled.div`
   }
 
   @media (max-width: 752px) {
-    width: 440px;
-  }
-
-  @media (max-width: 440px) {
-    width: 304px;
+    width: calc(100% - 32px);
   }
 `;
 
@@ -43,11 +39,7 @@ export const ContentWrapper = styled.div`
   }
 
   @media (max-width: 752px) {
-    width: 440px;
-  }
-
-  @media (max-width: 440px) {
-    width: 304px;
+    width: calc(100% - 32px);
   }
 `;
 

@@ -113,7 +113,7 @@ export const DropdownContainer = styled.div`
     left: 0;
     bottom: 105px;
     z-index: 1;
-    width: 304px;
+    width: calc(100% - 36px);
   }
 `;
 

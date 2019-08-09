@@ -21,6 +21,14 @@ export default class ErrorBoundary extends Component {
     return { hasError: true };
   }
 
+  componentDidUpdate(prevProps: Readonly<P>): void {
+    const { is404Error } = this.props;
+
+    if (prevProps.is404Error !== is404Error && is404Error) {
+      this.setState({ hasError: true });
+    }
+  }
+
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI

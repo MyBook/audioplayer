@@ -44,11 +44,7 @@ export const TimeLineContainer = styled.div`
   }
 
   @media (max-width: 752px) {
-    width: 440px;
-  }
-
-  @media (max-width: 440px) {
-    width: 304px;
+    width: 100%;
   }
 `;
 
@@ -83,12 +79,8 @@ export const TimeLineWrapper = styled.div`
   }
 
   @media (max-width: 752px) {
-    width: 288px;
-  }
-
-  @media (max-width: 440px) {
-    width: 272px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 0 8px;
   }
 `;
 
@@ -118,8 +110,16 @@ const TimeMarker = styled.div`
 
 export const TimeCurrent = styled(TimeMarker)`
   left: 24px;
+
+  @media (max-width: 752px) {
+    left: 0;
+  }
 `;
 
 export const TimeOverall = styled(TimeMarker)`
   right: 24px;
+
+  @media (max-width: 752px) {
+    right: 0;
+  }
 `;

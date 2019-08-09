@@ -59,6 +59,7 @@ type Props = {
   styles: styles,
   urls: {},
   isPodcastOrLecture: boolean,
+  is404Error: boolean,
 };
 
 class Player extends PureComponent<Props> {
@@ -147,15 +148,20 @@ class Player extends PureComponent<Props> {
       hidePlayer,
       changeBook,
       isPodcastOrLecture,
+      is404Error,
     } = this.props;
 
     return (
       <ThemeProvider theme={styles}>
         <PlayerWrapper className="player-wrapper">
-          <ErrorBoundary>
+          <PowerOffIconWrapper>
+            <PowerOff onClick={hidePlayer} />
+          </PowerOffIconWrapper>
+          <ErrorBoundary is404Error={is404Error}>
             {isFreeFragment && isFetched && (
               <FreeFragmentMessage {...book} TrialMessage={TrialMessage} />
             )}
+
             <FooterBottomSpace />
             {isBookmarksConflictNotificationShow && (
               <Notification
@@ -181,24 +187,13 @@ class Player extends PureComponent<Props> {
                   Link={Link}
                   isPodcastOrLecture={isPodcastOrLecture}
                 />
-
                 <IconsWrapper>
-                  {!isFreeFragment ? (
+                  {!isFreeFragment && (
                     <TableOfContents
                       Link={Link}
                       hidePlayer={hidePlayer}
                       changeBook={changeBook}
                     />
-                  ) : (
-                    <PowerOffIconWrapper>
-                      <PowerOff
-                        onClick={() => {
-                          tracking("onTurnOffOnTrial");
-                          hidePlayer();
-                        }}
-                        isFetched={isFetched}
-                      />
-                    </PowerOffIconWrapper>
                   )}
                   <BackwardIcon
                     onClick={this.handleBackward}
@@ -209,10 +204,8 @@ class Player extends PureComponent<Props> {
                     onClick={this.handleForward}
                     isFetched={isFetched}
                   />
-                  {!isFreeFragment ? (
+                  {!isFreeFragment && (
                     <PlaybackRateControl isFetched={isFetched} />
-                  ) : (
-                    <PlaybackRateWrapper />
                   )}
                 </IconsWrapper>
 
@@ -245,6 +238,7 @@ const mapStateToProps = ({
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,
+  is404Error,
 }) => ({
   book,
   isPodcastOrLecture,
@@ -259,6 +253,7 @@ const mapStateToProps = ({
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,
+  is404Error,
 });
 
 export default hot(

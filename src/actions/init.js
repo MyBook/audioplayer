@@ -72,6 +72,12 @@ function addPlayerEventListeners({
     }
   });
 
+  player.addEventListener("error", e => {
+    if (e.path[0].error.code === 4) {
+      dispatch({ type: "SET_404_ERROR" });
+    }
+  });
+
   player.addEventListener("timeupdate", () => {
     const { isPlaying, currentTime } = getState();
     if (
