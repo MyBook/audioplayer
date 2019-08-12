@@ -24,8 +24,8 @@ export default class ErrorBoundary extends Component {
   componentDidUpdate(prevProps: Readonly<P>): void {
     const { is404Error } = this.props;
 
-    if (prevProps.is404Error !== is404Error && is404Error) {
-      this.setState({ hasError: true });
+    if (prevProps.is404Error !== is404Error) {
+      this.setState({ hasError: is404Error });
     }
   }
 

@@ -2,7 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { IconWrapper } from "components/Icons/index.styled";
 
-const Icon = styled(IconWrapper)``;
+const Icon = styled(IconWrapper)`
+  border: 0;
+  border-radius: 100%;
+`;
 
 export const PowerOffIconWrapper = styled.div`
   position: absolute;

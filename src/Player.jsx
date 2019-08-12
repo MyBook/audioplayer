@@ -76,14 +76,14 @@ class Player extends PureComponent<Props> {
     resetPlayer(urls);
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const { bookId, resetPlayer, urls, isFreeFragment } = this.props;
 
     if (
       bookId !== prevProps.bookId ||
       isFreeFragment !== prevProps.isFreeFragment
     ) {
-      resetPlayer(urls);
+      await resetPlayer(urls);
       this.init();
     }
   }
