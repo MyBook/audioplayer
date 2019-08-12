@@ -60,12 +60,13 @@ type Props = {
   urls: {},
   isPodcastOrLecture: boolean,
   is404Error: boolean,
+  isEnableAutoplay: boolean,
 };
 
 class Player extends PureComponent<Props> {
   constructor(props) {
     super(props);
-    this.init(this.props.isFreeFragment);
+    this.init();
   }
 
   async componentWillUnmount() {
@@ -83,11 +84,11 @@ class Player extends PureComponent<Props> {
       isFreeFragment !== prevProps.isFreeFragment
     ) {
       resetPlayer(urls);
-      this.init(isFreeFragment);
+      this.init();
     }
   }
 
-  init = async isFreeFragment => {
+  init = async () => {
     const {
       init,
       getAutoBookmarkFromServer,
@@ -98,12 +99,14 @@ class Player extends PureComponent<Props> {
       seriesAdaptor,
       changeBook,
       handlePlay,
+      isFreeFragment,
+      isEnableAutoplay,
     } = this.props;
     try {
       await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
       await init(isFreeFragment, urls, changeBook);
       await getAutoBookmarkFromServer(bookId, urls);
-      await handlePlay();
+      isEnableAutoplay && (await handlePlay());
     } catch (e) {
       console.error(e);
     }

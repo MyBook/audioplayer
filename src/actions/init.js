@@ -152,12 +152,12 @@ export const init = (
   urls,
   changeBook: Function,
 ) => async (dispatch: Function, getState: Function) => {
-  const { player } = getState();
-
   await dispatch(setFreeFragment(isFreeFragment));
 
+  const { player } = getState();
   const { isFreeFragment: _isFreeFragment, book } = getState();
   const source = _isFreeFragment ? book.preview : book.files[0];
+
   player.src = source.url;
 
   setLocalOptions({ dispatch, isFreeFragment });
