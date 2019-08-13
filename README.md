@@ -19,9 +19,16 @@ import Link from "react-router-dom";
 function TrialMessage() {
   return <div>Сообщение о покупке подписки</div>;
 }
+const baseUrl = /^https?:\/\/[^/]*/;
+
+function getLink(link) {
+  return link.replace(baseUrl, "");
+}
+
 
 function playerOptions(isActiveSubscription) {
   return {
+    isEnableAutoplay: false,
     Link: Link,
     TrialMessage: TrialMessage,
     isFreeFragment: !isActiveSubscription,
@@ -52,6 +59,17 @@ function playerOptions(isActiveSubscription) {
         bookLink,
         authorLink,
         authorName: cover_name,
+      };
+    },
+    seriesAdaptor: series => {
+      const { web_url, name, default_image, id, book_count } = series;
+
+      return {
+        id,
+        name,
+        url: getLink(web_url),
+        cover: default_image,
+        bookCount: book_count,
       };
     },
   };

@@ -8,5 +8,12 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react"
-  ]
+  ],
+  "env": {
+    "dev": {
+      "plugins": [
+        "babel-plugin-styled-components"
+      ]
+    }
+  }
 }

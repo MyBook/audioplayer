@@ -7,6 +7,7 @@ import devMiddleware from "webpack-dev-middleware";
 import hotMiddleware from "webpack-hot-middleware";
 import book from "./book";
 import path from "path";
+import fs from "fs";
 
 const app = express();
 const compiler = webpack(config);
@@ -25,8 +26,25 @@ app.get("/", (req, res) => {
   res.send(template());
 });
 
-app.get("/audiobooks/1", (req, res) => {
+app.get("/api/audiobooks/1/", (req, res) => {
   res.json(book);
+});
+
+app.get("/api/audiobooks/0/", (req, res) => {
+  res.json(book);
+});
+
+app.get("/api/audiofiles/218646/file.mp3", (req, res) => {
+  const filePath = path.resolve("example/file.mp3");
+  const stat = fs.statSync(filePath);
+
+  res.writeHead(200, {
+    "Content-Type": "audio/mpeg",
+    "Content-Length": stat.size,
+  });
+
+  const readStream = fs.createReadStream(filePath);
+  readStream.pipe(res);
 });
 
 app.get("/styles.css", (req, res) => {
