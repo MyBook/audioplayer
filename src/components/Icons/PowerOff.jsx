@@ -5,6 +5,7 @@ import { IconWrapper } from "components/Icons/index.styled";
 const Icon = styled(IconWrapper)`
   border: 0;
   border-radius: 100%;
+  padding: 0;
 `;
 
 export const PowerOffIconWrapper = styled.div`

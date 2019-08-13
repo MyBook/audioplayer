@@ -8,6 +8,7 @@ const H1 = styled.h1`
   justify-content: center;
   height: 100%;
   font-size: 15px;
+  margin: 0;
 `;
 
 export default class ErrorBoundary extends Component {

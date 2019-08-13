@@ -57,25 +57,29 @@ function addPlayerEventListeners({
   changeBook,
 }) {
   player.addEventListener("loadedmetadata", async () => {
-    dispatch({
+    await dispatch({
       type: "LOADED_META_DATA",
       payload: { duration: player.duration },
     });
+    await dispatch({ type: "CAN_PLAY" });
   });
 
   player.addEventListener("canplay", async () => {
     const { isNeedToTimeUpdate, currentTime } = getState();
-    await dispatch({ type: "CAN_PLAY" });
+
     if (isNeedToTimeUpdate) {
       await dispatch(handleTimeUpdate(currentTime));
       await dispatch({ type: "IS_NO_NEED_TO_TIME_UPDATE" });
     }
   });
 
-  player.addEventListener("error", e => {
-    if (e.path[0].error.code === 4) {
+  player.addEventListener("error", (e = {}) => {
+    const { srcElement } = e;
+
+    if (srcElement && srcElement.error.code === 4) {
       dispatch({ type: "SET_404_ERROR" });
     }
+    console.error(srcElement.error);
   });
 
   player.addEventListener("timeupdate", () => {
@@ -200,7 +204,6 @@ export const getBook = (
     isPodcastOrLecture = true;
     await dispatch(getSeries(book, urls, seriesAdaptor));
   }
-
   dispatch({
     type: "GET_BOOK",
     payload: { book, isPodcastOrLecture },
