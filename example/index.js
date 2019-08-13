@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Link } from "react-router-dom";
 
-import Player from "../src";
+import Player from "./Player";
 
 const isActiveSubscription = true;
 

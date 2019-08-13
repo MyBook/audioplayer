@@ -20,6 +20,7 @@ export default function() {
     <body>
       <div id="app"></div>
     </body>
+    <script type="text/javascript" src="${manifest["vendor.js"]}"></script>
     <script type="text/javascript" src="${manifest["index.js"]}"></script>
   </html>
   `;
