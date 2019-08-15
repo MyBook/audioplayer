@@ -33,7 +33,7 @@ export default class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <H1>У нас ошибка. Попробуйте перезагрузить</H1>;
+      return <H1>Что-то пошло не так. Пожалуйста, перезагрузите страницу</H1>;
     }
 
     return this.props.children;
