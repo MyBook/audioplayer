@@ -85,7 +85,7 @@ export const setAutoBookmark = urls => async (
 ) => {
   const store = getStore();
   saveLocalAutoBookmark(store);
-  const autoBookMark = createBookMark(store);
+  const autoBookMark = createBookMark(store, false);
   const { url, version } = urls.setAutoBookmark();
 
   const result = await doFetch({
@@ -114,16 +114,24 @@ function saveLocalAutoBookmark(store) {
   localStorage.setItem("autoBookmarks", newLocalBookmarks);
 }
 
-function createBookMark({ book, currentTime, currentChapterNumber }) {
+function createBookMark(
+  { book, currentTime, currentChapterNumber },
+  withChapter = true,
+) {
   const date = new Date();
 
   date.setSeconds(0, 0);
 
-  return {
+  const bookMark = {
     book: book.id,
     bookmarked_at: date.toISOString(),
     file: book.files[currentChapterNumber].id,
-    chapterNumber: currentChapterNumber,
     position: Math.floor(currentTime),
   };
+
+  if (withChapter) {
+    bookMark.chapterNumber = currentChapterNumber;
+  }
+
+  return bookMark;
 }

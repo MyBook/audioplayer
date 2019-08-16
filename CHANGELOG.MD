@@ -1,3 +1,10 @@
+<a name="0.2.10"></a>
+## 0.2.10 (2019-16-08)
+
+### Fix
+
+* Don't send chapter number to server on set bookmark
+
 <a name="0.2.9"></a>
 ## 0.2.9 (2019-15-08)
 
