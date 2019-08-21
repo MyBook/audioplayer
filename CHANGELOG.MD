@@ -1,3 +1,10 @@
+<a name="0.2.11"></a>
+## 0.2.11 (2019-21-08)
+
+### Improvement
+
+* Add publish script to avoid fuck up when publishing
+
 <a name="0.2.10"></a>
 ## 0.2.10 (2019-16-08)
 
