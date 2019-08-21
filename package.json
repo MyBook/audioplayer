@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "BABEL_ENV=dev NODE_ENV=development nodemon --watch webpack --watch example --exec 'node example/app.js'",
     "build": "rm -rf dist && BABEL_ENV=production NODE_ENV=production webpack --config=webpack/webpack.config.js && cp -f -v src/styles.css dist/style.css",
-    "devbuild": "yarn install --production=true"
+    "devbuild": "yarn install --production=true",
+    "publish:patch": "npm version patch && git push && npm run build && npm publish"
   },
   "peerDependencies": {
     "react": "16.8.6",
