@@ -19,6 +19,7 @@ import truncate from "utils/truncate";
 import TypeIcons from "components/TypeIcons";
 import Chapters from "components/TableOfContents/Chapters";
 import Episodes from "components/TableOfContents/Episodes";
+import plural, { episodesPlural } from "utils/plural";
 
 function TableOfContents({
   isTableOfContentsShow,
@@ -88,8 +89,8 @@ function TableOfContents({
                   </TypeWrapper>
                   {isPodcastOrLecture && (
                     <TypeWrapper>
-                      {series.bookCount} plural(series.bookCount,
-                      ...episodesPlural)}
+                      {series.bookCount}{" "}
+                      {plural(series.bookCount, ...episodesPlural)}
                     </TypeWrapper>
                   )}
                   <Link
