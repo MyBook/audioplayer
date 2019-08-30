@@ -1,5 +1,9 @@
+import { InitialState } from "types";
+
+// @ts-ignore
 const player = typeof Audio !== "undefined" ? new Audio() : {};
-const initialState = {
+
+const initialState: InitialState = {
   isFetched: false,
   isFetching: false,
   book: {},

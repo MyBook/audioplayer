@@ -18,26 +18,28 @@ import {
 import timeFormat from "components/utils/timeFormat";
 
 type Props = {
-  duration: number,
-  currentTime: number,
-  width?: number,
-  isFetched: boolean,
-  handleTimeUpdate: Function,
-  handlePlay: Function,
-  handlePause: Function,
+  duration: number;
+  currentTime: number;
+  width?: number;
+  isFetched: boolean;
+  handleTimeUpdate: Function;
+  handlePlay: Function;
+  handlePause: Function;
 };
 
 export default class Timeline extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.wrapperRef = React.createRef();
+    this.lastXPosition = 0;
+    this.newCurrentValue = 0;
   }
 
   wrapperRef: { current: null | HTMLDivElement };
   lastXPosition: number;
   newCurrentValue: number;
 
-  changeValue = (e: MouseEvent) => {
+  changeValue = (e: MouseEvent | TouchEvent) => {
     //если курсор по оси Х внутри враппера
     const wrapper = this.wrapperRef.current;
     if (!wrapper) return;
@@ -119,7 +121,7 @@ export default class Timeline extends PureComponent<Props> {
             </Wrapper>
           </TimeLineWrapper>
         ) : (
-          <TimeLineWrapper>
+          <TimeLineWrapper isFetched={isFetched}>
             <Wrapper />
           </TimeLineWrapper>
         )}

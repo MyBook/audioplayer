@@ -22,7 +22,7 @@ const common = {
   },
   resolve: {
     modules: [path.resolve(srcPath), "node_modules"],
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
 
   plugins: [
@@ -38,11 +38,12 @@ const common = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
           presets: [
+            "@babel/preset-typescript",
             "@babel/preset-flow",
             ["@babel/preset-env"],
             "@babel/react",

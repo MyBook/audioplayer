@@ -1,6 +1,4 @@
-//@flow
 import React, { PureComponent } from "react";
-import type { ComponentType } from "react";
 import { ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
 import { hot } from "react-hot-loader/root";
@@ -24,47 +22,12 @@ import PlayPauseButton from "components/PlayPauseButton";
 import FreeFragmentMessage from "components/FreeFragmentMessage";
 import ErrorBoundary from "components/ErrorBoundary";
 import { defaultForwardSecondsCount } from "utils/playerConstants";
-import type { Book, TrialMessageProps, styles } from "utils/playerConstants";
 import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
-import { Wrapper as PlaybackRateWrapper } from "components/PlaybackRateControl/index.styled";
-import tracking from "components/utils/tracking";
 import { removeEventsListeners } from "components/utils/keyboardEventsListeners";
+import { InitialState, PlayerProps } from "types";
 
-type Props = {
-  TrialMessage: ComponentType<TrialMessageProps>,
-  Link: ComponentType<Link>,
-  isFreeFragment: boolean,
-  isFetched: boolean,
-  isBookmarksConflictNotificationShow: boolean,
-  bookId: number,
-  changeBook: Function,
-  init: Function,
-  getAutoBookmarkFromServer: Function,
-  getBook: Function,
-  handleTimeUpdate: Function,
-  handlePlay: Function,
-  handlePause: Function,
-  resetPlayer: Function,
-  applyServerBookmark: Function,
-  changeVolume: Function,
-  muteTrigger: Function,
-  bookAdaptor: Function,
-  seriesAdaptor: Function,
-  hidePlayer: Function,
-  currentTime: number,
-  duration: number,
-  currentChapterNumber: number,
-  volume: number,
-  book: Book,
-  styles: styles,
-  urls: {},
-  isPodcastOrLecture: boolean,
-  is404Error: boolean,
-  isEnableAutoplay: boolean,
-};
-
-class Player extends PureComponent<Props> {
-  constructor(props) {
+class Player extends PureComponent<PlayerProps> {
+  constructor(props: PlayerProps) {
     super(props);
     this.init();
   }
@@ -76,7 +39,7 @@ class Player extends PureComponent<Props> {
     resetPlayer(urls);
   }
 
-  async componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps: PlayerProps) {
     const { bookId, resetPlayer, urls, isFreeFragment } = this.props;
 
     if (
@@ -237,12 +200,11 @@ const mapStateToProps = ({
   duration,
   currentChapterNumber,
   isTableOfContentsShow,
-  isPaybackSpeedControlShow,
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,
   is404Error,
-}) => ({
+}: InitialState) => ({
   book,
   isPodcastOrLecture,
   isFetched,
@@ -252,7 +214,6 @@ const mapStateToProps = ({
   duration,
   currentChapterNumber,
   isTableOfContentsShow,
-  isPaybackSpeedControlShow,
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,

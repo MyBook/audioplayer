@@ -48,7 +48,7 @@ export const TimeLineContainer = styled.div`
   }
 `;
 
-export const TimeLineWrapper = styled.div`
+export const TimeLineWrapper = styled.div<{ isFetched: boolean }>`
   display: flex;
   align-items: center;
   width: 788px;
@@ -57,6 +57,15 @@ export const TimeLineWrapper = styled.div`
   height: 16px;
   border-radius: 4px;
   transition: height 0.2s;
+
+  @media (max-width: 940px) {
+    width: 600px;
+  }
+
+  @media (max-width: 752px) {
+    width: 100%;
+    padding: 0 8px;
+  }
 
   ${props =>
     props.isFetched &&
@@ -73,15 +82,6 @@ export const TimeLineWrapper = styled.div`
         }
       }
     `}
-
-  @media (max-width: 940px) {
-    width: 600px;
-  }
-
-  @media (max-width: 752px) {
-    width: 100%;
-    padding: 0 8px;
-  }
 `;
 
 export const ScrubArea = styled.div`
@@ -95,7 +95,7 @@ export const ScrubArea = styled.div`
   cursor: pointer;
 `;
 
-const TimeMarker = styled.div`
+const TimeMarker = styled.div<{ isFetched: boolean }>`
   z-index: 1;
   cursor: pointer;
   line-height: 10px;

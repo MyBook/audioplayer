@@ -10,12 +10,15 @@ import {
   ChapterPlaceholder,
 } from "components/BookInfo/index.styled";
 import truncate from "utils/truncate";
-import type { Book } from "utils/playerConstants";
+import { Book } from "types";
+import {Link} from "react-router-dom";
 
 type Props = {
-  currentChapterNumber: number,
-  isFetched: boolean,
-  book?: Book,
+  currentChapterNumber: number;
+  isFetched: boolean;
+  book?: Book;
+  Link: Link
+  isPodcastOrLecture: boolean
 };
 
 export default function(props: Props) {
@@ -26,10 +29,10 @@ export default function(props: Props) {
     Link,
     isPodcastOrLecture,
   } = props;
+
+  if (isFetched && book.name) {
   const { name, bookLink, default_image } = book;
   const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
-
-  if (isFetched) {
     return (
       <BookInfoWrapper>
         <Link to={bookLink} className="clear-links-style">

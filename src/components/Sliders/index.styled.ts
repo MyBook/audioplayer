@@ -16,7 +16,7 @@ export const Picker = styled.div`
   top: -6px;
 `;
 
-export const HorizontalWrapper = styled.div`
+export const HorizontalWrapper = styled.div<{ width: string }>`
   width: ${props => props.width}px;
   height: 4px;
   background: ${props => props.theme.almostWhite};
