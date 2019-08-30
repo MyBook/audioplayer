@@ -4,7 +4,7 @@ import {
   TableOfContentsWrapper,
   Timing,
 } from "components/TableOfContents/index.styled";
-import timeFormat from "components/utils/timeFormat";
+import timeFormatter from "components/utils/timeFormatter";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 export default function Chapters(props) {
@@ -31,8 +31,8 @@ export default function Chapters(props) {
         Глава {i + 1}
         <Timing>
           {i === currentChapterNumber
-            ? `${timeFormat(currentTime)} — ${timeFormat(duration)}`
-            : timeFormat(file.seconds)}
+            ? `${timeFormatter(currentTime)} — ${timeFormatter(duration)}`
+            : timeFormatter(file.seconds)}
         </Timing>
       </Chapter>
     );

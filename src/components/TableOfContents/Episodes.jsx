@@ -4,7 +4,7 @@ import {
   TableOfContentsWrapper,
   Timing,
 } from "components/TableOfContents/index.styled";
-import timeFormat from "components/utils/timeFormat";
+import timeFormatter from "components/utils/timeFormatter";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
 
@@ -28,8 +28,8 @@ export default function Episodes(props) {
         {truncate(name, isCurrentBook ? shortHeaderSize : longHeaderSize)}
         <Timing>
           {isCurrentBook
-            ? `${timeFormat(currentTime)} — ${timeFormat(duration)}`
-            : timeFormat(seconds)}
+            ? `${timeFormatter(currentTime)} — ${timeFormatter(duration)}`
+            : timeFormatter(seconds)}
         </Timing>
       </Chapter>
     );

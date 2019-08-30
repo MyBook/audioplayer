@@ -1,4 +1,4 @@
-export default function timeFormat(sec) {
+export default function timeFormatter(sec: number) {
   const rawSeconds = sec.toFixed ? sec.toFixed() : sec;
   const hours = ~~(rawSeconds / 3600);
   const minutes = ~~((rawSeconds % 3600) / 60);

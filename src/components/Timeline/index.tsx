@@ -1,4 +1,3 @@
-//@flow
 import React, { PureComponent } from "react";
 import {
   Progress,
@@ -15,7 +14,7 @@ import {
   getClickPositionX,
   isCursorOutsideWrapper,
 } from "components/utils/cursorPositionUtils";
-import timeFormat from "components/utils/timeFormat";
+import timeFormatter from "components/utils/timeFormatter";
 
 type Props = {
   duration: number;
@@ -98,7 +97,7 @@ export default class Timeline extends PureComponent<Props> {
     return (
       <TimeLineContainer>
         <TimeCurrent isFetched={isFetched}>
-          {timeFormat(currentTime)}
+          {timeFormatter(currentTime)}
         </TimeCurrent>
         {isFetched ? (
           <TimeLineWrapper isFetched={isFetched}>
@@ -125,7 +124,9 @@ export default class Timeline extends PureComponent<Props> {
             <Wrapper />
           </TimeLineWrapper>
         )}
-        <TimeOverall isFetched={isFetched}>{timeFormat(duration)}</TimeOverall>
+        <TimeOverall isFetched={isFetched}>
+          {timeFormatter(duration)}
+        </TimeOverall>
       </TimeLineContainer>
     );
   }

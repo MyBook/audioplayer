@@ -1,17 +1,16 @@
-//@flow
 import * as React from "react";
 import { ButtonStyled, LoaderStyled } from "components/Button/index.styled";
 
 type ButtonProps = {
-  children: React.Node,
-  onClick?: Function,
-  variation: "default" | "stroked" | "white",
-  className?: string,
-  withLoader?: boolean,
-  disabled?: boolean,
-  to?: string,
-  href?: string,
-  size?: "default" | "small",
+  children: Element;
+  onClick?: Function;
+  variation: "default" | "stroked" | "white";
+  className?: string;
+  withLoader?: boolean;
+  disabled?: boolean;
+  to?: string;
+  href?: string;
+  size?: "default" | "small";
 };
 
 export default class Button extends React.PureComponent<ButtonProps, {}> {

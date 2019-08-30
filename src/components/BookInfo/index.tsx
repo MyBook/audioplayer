@@ -1,4 +1,3 @@
-//@flow
 import React from "react";
 import {
   Cover,
@@ -11,14 +10,14 @@ import {
 } from "components/BookInfo/index.styled";
 import truncate from "utils/truncate";
 import { Book } from "types";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type Props = {
   currentChapterNumber: number;
   isFetched: boolean;
   book?: Book;
-  Link: Link
-  isPodcastOrLecture: boolean
+  Link: Link;
+  isPodcastOrLecture: boolean;
 };
 
 export default function(props: Props) {
@@ -31,8 +30,8 @@ export default function(props: Props) {
   } = props;
 
   if (isFetched && book.name) {
-  const { name, bookLink, default_image } = book;
-  const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
+    const { name, bookLink, default_image } = book;
+    const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
     return (
       <BookInfoWrapper>
         <Link to={bookLink} className="clear-links-style">
