@@ -25,7 +25,7 @@ function getLink(link) {
   return link.replace(baseUrl, "");
 }
 
-function onCompleteBookListeningHandler() {
+function onCompleteBookListeningHandler(book) {
     //if book is end do something 
 }
 
@@ -37,7 +37,7 @@ function playerOptions(isActiveSubscription) {
     Link: Link,
     TrialMessage: TrialMessage,
     isFreeFragment: !isActiveSubscription,
-    onCompleteBookListeningHandler: onCompleteBookListeningHandler,
+    onCompleteBookListeningHandler,
     styles: {
       almostWhite: "#F4F4F4",
       primary: "#00B0C2",

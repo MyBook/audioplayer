@@ -152,7 +152,7 @@ function addPlayerEventListeners({
         const newChapter = isLastChapter ? 0 : nextChapterNumber;
 
         if (isLastChapter && onCompleteBookListeningHandler) {
-          onCompleteBookListeningHandler();
+          onCompleteBookListeningHandler(currentBook);
         }
 
         await dispatch(changeChapter(newChapter));

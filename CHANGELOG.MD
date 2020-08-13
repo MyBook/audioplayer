@@ -1,4 +1,10 @@
-<a name="0.2.14"></a>
+<a name="0.2.15"></a>
+## 0.2.15 (2020-13-08)
+
+### Improvement
+* Need to send the current book to `onCompleteBookListeningHandler` 
+
+<a name="0.2.15"></a>
 ## 0.2.14 (2020-13-08)
 
 ### Improvement
