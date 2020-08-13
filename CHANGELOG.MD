@@ -2,8 +2,18 @@
 ## 0.2.12 (2019-28-08)
 
 ### Fix
+* Try to change logic of player state toggle to fix "next chapter" bug
 
-* Lost { in table of contents
+### Improvement
+* Showing chapter titles if it exists
+
+
+<a name="0.2.12"></a>
+## 0.2.12 (2019-28-08)
+
+### Fix
+
+* Lost `{` in table of contents
 
 <a name="0.2.11"></a>
 ## 0.2.11 (2019-21-08)
