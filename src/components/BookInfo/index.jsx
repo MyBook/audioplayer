@@ -18,6 +18,8 @@ type Props = {
   book?: Book,
 };
 
+const maxTitlesLength = 20;
+
 export default function(props: Props) {
   const {
     currentChapterNumber,
@@ -26,8 +28,14 @@ export default function(props: Props) {
     Link,
     isPodcastOrLecture,
   } = props;
-  const { name, bookLink, default_image } = book;
+  const { name, bookLink, default_image, files } = book;
   const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
+  let titleText = "";
+
+  if (files && !isPodcastOrLecture) {
+    const title = files[currentChapterNumber].title;
+    titleText = title ? title : `Глава ${currentChapterNumber + 1}}`;
+  }
 
   if (isFetched) {
     return (
@@ -42,7 +50,7 @@ export default function(props: Props) {
           <Link to={bookLink} className="clear-links-style">
             <Title>{truncate(name, maxBookTitleLength)}</Title>
           </Link>
-          {!isPodcastOrLecture && <>Глава {currentChapterNumber + 1}</>}
+          {truncate(titleText, maxTitlesLength)}
         </div>
       </BookInfoWrapper>
     );

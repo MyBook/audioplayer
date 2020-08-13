@@ -6,6 +6,7 @@ import {
 } from "components/TableOfContents/index.styled";
 import timeFormat from "components/utils/timeFormat";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import truncate from "utils/truncate";
 
 export default function Chapters(props) {
   const {
@@ -17,22 +18,32 @@ export default function Chapters(props) {
     duration,
   } = props;
 
+  const maxTitlesLength = 20;
+
   const chapters = files.map((file, i) => {
+    const { title, seconds } = file;
+    const isActive = currentChapterNumber === i;
+    let titleText = `Глава ${i + 1}`;
+
+    if (title) {
+      titleText = isActive ? truncate(title, maxTitlesLength) : title;
+    }
+
     return (
       <Chapter
         key={i}
         className={`jest-player-chapter-${i + 1}`}
-        active={currentChapterNumber === i}
+        active={isActive}
         onClick={async () => {
           await changeChapter(i);
           await handlePlay();
         }}
       >
-        Глава {i + 1}
+        {titleText}
         <Timing>
           {i === currentChapterNumber
             ? `${timeFormat(currentTime)} — ${timeFormat(duration)}`
-            : timeFormat(file.seconds)}
+            : timeFormat(seconds)}
         </Timing>
       </Chapter>
     );
