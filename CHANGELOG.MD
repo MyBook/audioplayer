@@ -1,12 +1,18 @@
-<a name="0.2.12"></a>
-## 0.2.12 (2019-28-08)
+<a name="0.2.14"></a>
+## 0.2.14 (2020-13-08)
+
+### Improvement
+* Added `onCompleteBookListeningHandler` function 
+
+
+<a name="0.2.13"></a>
+## 0.2.13 (2020-13-08)
 
 ### Fix
 * Try to change logic of player state toggle to fix "next chapter" bug
 
 ### Improvement
 * Showing chapter titles if it exists
-
 
 <a name="0.2.12"></a>
 ## 0.2.12 (2019-28-08)

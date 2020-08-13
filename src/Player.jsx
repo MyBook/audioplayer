@@ -51,6 +51,7 @@ type Props = {
   bookAdaptor: Function,
   seriesAdaptor: Function,
   hidePlayer: Function,
+  onCompleteBookListeningHandler: Function,
   currentTime: number,
   duration: number,
   currentChapterNumber: number,
@@ -101,10 +102,16 @@ class Player extends PureComponent<Props> {
       handlePlay,
       isFreeFragment,
       isEnableAutoplay,
+      onCompleteBookListeningHandler,
     } = this.props;
     try {
       await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
-      await init(isFreeFragment, urls, changeBook);
+      await init(
+        isFreeFragment,
+        urls,
+        changeBook,
+        onCompleteBookListeningHandler,
+      );
       await getAutoBookmarkFromServer(bookId, urls);
       isEnableAutoplay && (await handlePlay());
     } catch (e) {

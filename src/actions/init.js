@@ -55,6 +55,7 @@ function addPlayerEventListeners({
   isFreeFragment,
   urls,
   changeBook,
+  onCompleteBookListeningHandler,
 }) {
   player.loop = false;
 
@@ -146,12 +147,14 @@ function addPlayerEventListeners({
           changeBook(seriesBooks[currentBookIndex + 1].id);
         }
       } else {
-        console.log({ currentChapterNumber });
-        const newChapter =
-          currentBook.files.length > currentChapterNumber + 1
-            ? currentChapterNumber + 1
-            : 0;
-        console.log({ newChapter });
+        const nextChapterNumber = currentChapterNumber + 1;
+        const isLastChapter = currentBook.files.length < nextChapterNumber;
+        const newChapter = isLastChapter ? 0 : nextChapterNumber;
+
+        if (isLastChapter && onCompleteBookListeningHandler) {
+          onCompleteBookListeningHandler();
+        }
+
         await dispatch(changeChapter(newChapter));
         await dispatch(handlePlay());
       }
@@ -178,6 +181,7 @@ export const init = (
   isFreeFragment: boolean,
   urls,
   changeBook: Function,
+  onCompleteBookListeningHandler,
 ) => async (dispatch: Function, getState: Function) => {
   await dispatch(setFreeFragment(isFreeFragment));
 
@@ -189,7 +193,15 @@ export const init = (
   player.src = source.url;
 
   setLocalOptions({ dispatch, isFreeFragment });
-  addPlayerEventListeners({ dispatch, getState, urls, player, isFreeFragment });
+  addPlayerEventListeners({
+    dispatch,
+    getState,
+    urls,
+    player,
+    isFreeFragment,
+    onCompleteBookListeningHandler,
+    changeBook,
+  });
   addKeyboardEventListeners({ dispatch, getState, urls });
 
   dispatch({ type: "INIT" });
