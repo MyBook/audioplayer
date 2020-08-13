@@ -56,6 +56,25 @@ function addPlayerEventListeners({
   urls,
   changeBook,
 }) {
+  player.loop = false;
+
+  player.addEventListener("play", () => {
+    tracking("onPlay");
+
+    dispatch({ type: "PLAY" });
+  });
+
+  player.addEventListener("pause", () => {
+    tracking("onPause");
+
+    if (!isFreeFragment) {
+      dispatch(sendStatistics(urls));
+      dispatch(setAutoBookmark(urls));
+    }
+
+    dispatch({ type: "PAUSE" });
+  });
+
   player.addEventListener("loadedmetadata", async () => {
     await dispatch({
       type: "LOADED_META_DATA",
@@ -114,6 +133,8 @@ function addPlayerEventListeners({
         isPodcastOrLecture,
         series,
       } = getState();
+      console.log("ended");
+      player.pause();
 
       if (isPodcastOrLecture) {
         const seriesBooks = series.books;
@@ -125,10 +146,12 @@ function addPlayerEventListeners({
           changeBook(seriesBooks[currentBookIndex + 1].id);
         }
       } else {
+        console.log({ currentChapterNumber });
         const newChapter =
           currentBook.files.length > currentChapterNumber + 1
             ? currentChapterNumber + 1
             : 0;
+        console.log({ newChapter });
         await dispatch(changeChapter(newChapter));
         await dispatch(handlePlay());
       }
@@ -160,8 +183,9 @@ export const init = (
 
   const { player } = getState();
   const { isFreeFragment: _isFreeFragment, book } = getState();
-  const source = _isFreeFragment ? book.preview : book.files[0];
 
+  const source = _isFreeFragment ? book.preview : book.files[0];
+  console.log({ source });
   player.src = source.url;
 
   setLocalOptions({ dispatch, isFreeFragment });
