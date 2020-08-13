@@ -212,7 +212,7 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218646/file.mp3",
       seconds: 973,
       bytes: 7510917,
-      title: "",
+      title: "Ололололо олололол",
       order: 0,
     },
     {
@@ -222,7 +222,7 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218647/file.mp3",
       seconds: 3847,
       bytes: 29740769,
-      title: "",
+      title: "Урок 2. Зачем нужна финансовая грамотность",
       order: 1,
     },
     {
