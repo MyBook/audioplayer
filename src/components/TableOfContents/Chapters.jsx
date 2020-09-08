@@ -7,6 +7,10 @@ import {
 import timeFormat from "components/utils/timeFormat";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
+import {
+  longHeaderSize,
+  shortHeaderSize,
+} from "components/TableOfContents/Episodes";
 
 export default function Chapters(props) {
   const {
@@ -18,20 +22,21 @@ export default function Chapters(props) {
     duration,
   } = props;
 
-  const maxTitlesLength = 20;
-
   const chapters = files.map((file, i) => {
     const { title, seconds } = file;
     const isActive = currentChapterNumber === i;
     let titleText = `Глава ${i + 1}`;
 
     if (title) {
-      titleText = isActive ? truncate(title, maxTitlesLength) : title;
+      titleText = truncate(title, isActive ? shortHeaderSize : longHeaderSize);
     }
+
+    const wrapperTitle = title ? title : titleText;
 
     return (
       <Chapter
         key={i}
+        title={wrapperTitle}
         className={`jest-player-chapter-${i + 1}`}
         active={isActive}
         onClick={async () => {

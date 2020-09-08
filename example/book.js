@@ -242,7 +242,8 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218649/file.mp3",
       seconds: 929,
       bytes: 7419613,
-      title: "",
+      title:
+        "68 Проекты участников архитектурного конкурса Британки и Космоскоу - 02:42:51",
       order: 3,
     },
     {

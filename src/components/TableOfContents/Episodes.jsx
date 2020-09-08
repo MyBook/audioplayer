@@ -8,17 +8,19 @@ import timeFormat from "components/utils/timeFormat";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
 
+export const longHeaderSize = 30;
+export const shortHeaderSize = 17;
+
 export default function Episodes(props) {
   const { series, currentBookId, changeBook, currentTime, duration } = props;
 
-  const longHeaderSize = 30;
-  const shortHeaderSize = 17;
-
   const episodes = series.books.map(({ name, id, seconds }, i) => {
     const isCurrentBook = id === currentBookId;
+
     return (
       <Chapter
         key={i}
+        title={name}
         className={`jest-player-chapter-${i + 1}`}
         active={isCurrentBook}
         onClick={async () => {

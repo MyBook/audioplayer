@@ -34,7 +34,7 @@ export default function(props: Props) {
 
   if (files && !isPodcastOrLecture) {
     const title = files[currentChapterNumber].title;
-    titleText = title ? title : `Глава ${currentChapterNumber + 1}}`;
+    titleText = title ? title : `Глава ${currentChapterNumber + 1}`;
   }
 
   if (isFetched) {
@@ -50,7 +50,7 @@ export default function(props: Props) {
           <Link to={bookLink} className="clear-links-style">
             <Title>{truncate(name, maxBookTitleLength)}</Title>
           </Link>
-          {truncate(titleText, maxTitlesLength)}
+          <span title={titleText}>{truncate(titleText, maxTitlesLength)}</span>
         </div>
       </BookInfoWrapper>
     );
