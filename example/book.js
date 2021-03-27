@@ -21,7 +21,7 @@ export default {
     book_count: 11,
     created_at: "2015-09-15T19:34:13Z",
     updated_at: "2019-04-08T12:11:04Z",
-    description: "",
+    description: ""
   },
   image:
     "https://zvukislov.ru/storage/public/book_covers/68/85/6885dcbf-91bd-32b6-ba70-842a177b8af6.jpg",
@@ -50,10 +50,10 @@ export default {
         updated_at: "2019-04-09T12:00:18Z",
         book_count: 7,
         web_url: "https://zvukislov.ru/series/772-bogatyi-papa/",
-        type: "audiobook",
+        type: "audiobook"
       },
-      order: 0,
-    },
+      order: 0
+    }
   ],
   main_actor: {
     id: 2467,
@@ -68,7 +68,7 @@ export default {
     genitive_full_name: "Дениса Гармаша",
     book_count: 15,
     created_at: "2015-09-27T16:30:20Z",
-    updated_at: "2019-05-13T15:08:16Z",
+    updated_at: "2019-05-13T15:08:16Z"
   },
   created_at: "2016-10-14T15:03:32Z",
   reviews_rating: 4.33384379785605,
@@ -109,8 +109,8 @@ export default {
       book_count: 11,
       created_at: "2015-09-15T19:34:13Z",
       updated_at: "2019-04-08T12:11:04Z",
-      description: "",
-    },
+      description: ""
+    }
   ],
   actors: [
     {
@@ -126,21 +126,21 @@ export default {
       genitive_full_name: "Дениса Гармаша",
       book_count: 15,
       created_at: "2015-09-27T16:30:20Z",
-      updated_at: "2019-05-13T15:08:16Z",
-    },
+      updated_at: "2019-05-13T15:08:16Z"
+    }
   ],
   publisher: {
     id: 131,
     uri: "/api/publishers/131/",
     name: "Аудиоагент «АВ Паблишинг»",
     created_at: "2015-09-27T16:43:40Z",
-    updated_at: "2015-09-27T16:43:40Z",
+    updated_at: "2015-09-27T16:43:40Z"
   },
   rightholder: {
     id: 66,
     uri: "/api/rightholder/66/",
     name: "AB Publishing",
-    web_url: "https://zvukislov.ru/rightholder/66-ab-publishing/",
+    web_url: "https://zvukislov.ru/rightholder/66-ab-publishing/"
   },
   genres: [
     {
@@ -157,11 +157,11 @@ export default {
         order: 0,
         hide_genres: false,
         image: "https://zvukislov.ru/storage/public/niche_covers/2_.jpg",
-        web_url: "https://zvukislov.ru/catalog/29-biznes-knigi/",
+        web_url: "https://zvukislov.ru/catalog/29-biznes-knigi/"
       },
       book_count: 53,
       web_url:
-        "https://zvukislov.ru/catalog/29-biznes-knigi/856-lichnye-finansy/",
+        "https://zvukislov.ru/catalog/29-biznes-knigi/856-lichnye-finansy/"
     },
     {
       id: 901,
@@ -177,11 +177,11 @@ export default {
         order: 0,
         hide_genres: false,
         image: "https://zvukislov.ru/storage/public/niche_covers/2_.jpg",
-        web_url: "https://zvukislov.ru/catalog/29-biznes-knigi/",
+        web_url: "https://zvukislov.ru/catalog/29-biznes-knigi/"
       },
       book_count: 1173,
       web_url:
-        "https://zvukislov.ru/catalog/29-biznes-knigi/901-prosto-o-biznese/",
+        "https://zvukislov.ru/catalog/29-biznes-knigi/901-prosto-o-biznese/"
     },
     {
       id: 1276,
@@ -197,12 +197,12 @@ export default {
         order: 0,
         hide_genres: false,
         image: "https://zvukislov.ru/storage/public/niche_covers/3_.jpg",
-        web_url: "https://zvukislov.ru/catalog/37-knigi-po-psikhologii/",
+        web_url: "https://zvukislov.ru/catalog/37-knigi-po-psikhologii/"
       },
       book_count: 798,
       web_url:
-        "https://zvukislov.ru/catalog/37-knigi-po-psikhologii/1276-samorazvitie-lichnostnyi-rost/",
-    },
+        "https://zvukislov.ru/catalog/37-knigi-po-psikhologii/1276-samorazvitie-lichnostnyi-rost/"
+    }
   ],
   files: [
     {
@@ -212,8 +212,8 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218646/file.mp3",
       seconds: 973,
       bytes: 7510917,
-      title: "",
-      order: 0,
+      title: "Ололололо олололол",
+      order: 0
     },
     {
       id: 218647,
@@ -222,8 +222,8 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218647/file.mp3",
       seconds: 3847,
       bytes: 29740769,
-      title: "",
-      order: 1,
+      title: "Урок 2. Зачем нужна финансовая грамотность",
+      order: 1
     },
     {
       id: 218648,
@@ -233,7 +233,7 @@ export default {
       seconds: 2346,
       bytes: 18746245,
       title: "",
-      order: 2,
+      order: 2
     },
     {
       id: 218649,
@@ -242,8 +242,9 @@ export default {
       absolute_url: "https://zvukislov.ru/api/audiofiles/218649/file.mp3",
       seconds: 929,
       bytes: 7419613,
-      title: "",
-      order: 3,
+      title:
+        "68 Проекты участников архитектурного конкурса Британки и Космоскоу - 02:42:51",
+      order: 3
     },
     {
       id: 218650,
@@ -253,7 +254,7 @@ export default {
       seconds: 1344,
       bytes: 10698535,
       title: "",
-      order: 4,
+      order: 4
     },
     {
       id: 218651,
@@ -263,7 +264,7 @@ export default {
       seconds: 2827,
       bytes: 22129632,
       title: "",
-      order: 5,
+      order: 5
     },
     {
       id: 218652,
@@ -273,7 +274,7 @@ export default {
       seconds: 1792,
       bytes: 14377505,
       title: "",
-      order: 6,
+      order: 6
     },
     {
       id: 218653,
@@ -283,7 +284,7 @@ export default {
       seconds: 2250,
       bytes: 17871506,
       title: "",
-      order: 7,
+      order: 7
     },
     {
       id: 218654,
@@ -293,7 +294,7 @@ export default {
       seconds: 2976,
       bytes: 23818978,
       title: "",
-      order: 8,
+      order: 8
     },
     {
       id: 218655,
@@ -303,7 +304,7 @@ export default {
       seconds: 660,
       bytes: 5353050,
       title: "",
-      order: 9,
+      order: 9
     },
     {
       id: 218656,
@@ -313,7 +314,7 @@ export default {
       seconds: 915,
       bytes: 7266021,
       title: "",
-      order: 10,
+      order: 10
     },
     {
       id: 218657,
@@ -323,8 +324,8 @@ export default {
       seconds: 125,
       bytes: 1010811,
       title: "",
-      order: 11,
-    },
+      order: 11
+    }
   ],
   preview: {
     id: 218645,
@@ -334,15 +335,15 @@ export default {
     seconds: 20984,
     bytes: 2728905,
     title: "",
-    order: 0,
+    order: 0
   },
   tags: [
     {
       id: 782,
       uri: "/api/tags/782/",
       name: "крысиные бега",
-      web_url: "https://zvukislov.ru/catalog/books/?tag=782",
-    },
+      web_url: "https://zvukislov.ru/catalog/books/?tag=782"
+    }
   ],
   booksets: [
     {
@@ -360,7 +361,7 @@ export default {
       published_at: "2018-12-21T16:46:19Z",
       created_at: "2018-12-06T14:17:22Z",
       updated_at: "2018-12-21T16:59:38Z",
-      web_url: "https://zvukislov.ru/booksets/528-top-audioknig-za-2018-god/",
+      web_url: "https://zvukislov.ru/booksets/528-top-audioknig-za-2018-god/"
     },
     {
       id: 404,
@@ -377,7 +378,7 @@ export default {
       published_at: "2018-09-17T10:11:39Z",
       created_at: "2018-04-06T08:28:52Z",
       updated_at: "2019-04-03T09:20:30Z",
-      web_url: "https://zvukislov.ru/booksets/404-kak-dobitsia-uspekha/",
+      web_url: "https://zvukislov.ru/booksets/404-kak-dobitsia-uspekha/"
     },
     {
       id: 471,
@@ -395,7 +396,7 @@ export default {
       created_at: "2018-08-21T07:59:59Z",
       updated_at: "2018-09-18T14:21:12Z",
       web_url:
-        "https://zvukislov.ru/booksets/471-luchshie-knigi-po-psikhologii/",
+        "https://zvukislov.ru/booksets/471-luchshie-knigi-po-psikhologii/"
     },
     {
       id: 251,
@@ -411,7 +412,7 @@ export default {
       published_at: "2017-12-29T14:12:41Z",
       created_at: "2017-12-25T07:55:25Z",
       updated_at: "2017-12-29T14:12:49Z",
-      web_url: "https://zvukislov.ru/booksets/251-top-audioknig-za-2017-god/",
+      web_url: "https://zvukislov.ru/booksets/251-top-audioknig-za-2017-god/"
     },
     {
       id: 67,
@@ -429,7 +430,7 @@ export default {
       created_at: "2016-10-18T13:04:04Z",
       updated_at: "2018-05-15T07:23:08Z",
       web_url:
-        "https://zvukislov.ru/booksets/67-sekrety-uspekha-vydaiushchikhsia-lichnostei/",
+        "https://zvukislov.ru/booksets/67-sekrety-uspekha-vydaiushchikhsia-lichnostei/"
     },
     {
       id: 69,
@@ -447,10 +448,10 @@ export default {
       created_at: "2016-10-26T14:42:49Z",
       updated_at: "2017-11-27T10:39:34Z",
       web_url:
-        "https://zvukislov.ru/booksets/69-kollektsiia-knig-biznes-guru-roberta-kiiosaki/",
-    },
+        "https://zvukislov.ru/booksets/69-kollektsiia-knig-biznes-guru-roberta-kiiosaki/"
+    }
   ],
   is_available_for_user: false,
   is_now_playing: false,
-  is_in_playlist: false,
+  is_in_playlist: false
 };

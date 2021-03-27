@@ -1,8 +1,8 @@
-import * as React from "react";
-import { ButtonStyled, LoaderStyled } from "components/Button/index.styled";
+import React, { ReactElement } from "react";
+import { ButtonStyled, LoaderStyled } from "components/Button/styled";
 
 type ButtonProps = {
-  children: Element;
+  children: ReactElement | string;
   onClick?: Function;
   variation: "default" | "stroked" | "white";
   className?: string;
@@ -17,10 +17,10 @@ export default class Button extends React.PureComponent<ButtonProps, {}> {
   static defaultProps = {
     variation: "default",
     size: "default",
-    disabled: false,
+    disabled: false
   };
 
-  onClick = (e: Event) => {
+  onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const { onClick } = this.props;
     onClick && onClick();
@@ -37,9 +37,10 @@ export default class Button extends React.PureComponent<ButtonProps, {}> {
       size,
       onClick,
       to,
+      ...rest
     } = this.props;
 
-    let component = to ? "a" : "button";
+    let component: keyof JSX.IntrinsicElements = to ? "a" : "button";
     if (href) component = "a";
 
     return (
@@ -48,13 +49,9 @@ export default class Button extends React.PureComponent<ButtonProps, {}> {
           onClick && this.onClick(e);
         }}
         className={className}
-        variation={variation}
         disabled={disabled}
-        href={href}
-        to={href}
         as={component}
-        size={size}
-        {...this.props}
+        {...rest}
       >
         {children}
         {withLoader ? <LoaderStyled color="white" /> : ""}

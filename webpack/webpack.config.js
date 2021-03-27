@@ -18,21 +18,21 @@ const common = {
   output: {
     path: publicPath,
     publicPath: publicPath,
-    filename: "[name].js",
+    filename: "[name].js"
   },
   resolve: {
     modules: [path.resolve(srcPath), "node_modules"],
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
   },
 
   plugins: [
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(
-        process.env.NODE_ENV || "development",
+        process.env.NODE_ENV || "development"
       ),
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
-      global: { IS_BROWSER: true },
-    }),
+      global: { IS_BROWSER: true }
+    })
   ],
 
   module: {
@@ -44,13 +44,12 @@ const common = {
         options: {
           presets: [
             "@babel/preset-typescript",
-            "@babel/preset-flow",
             ["@babel/preset-env"],
-            "@babel/react",
-          ],
-        },
-      },
-    ],
+            "@babel/react"
+          ]
+        }
+      }
+    ]
   },
 
   optimization: {
@@ -62,11 +61,11 @@ const common = {
           name: "vendor",
           chunks: "initial",
           test: /node_modules/,
-          priority: 20,
-        },
-      },
-    },
-  },
+          priority: 20
+        }
+      }
+    }
+  }
 };
 
 if (!isProdMode) {
@@ -84,20 +83,20 @@ if (!isProdMode) {
       overlay: true,
       hot: true,
       stats: {
-        colors: true,
-      },
+        colors: true
+      }
     },
     entry: {
       index: [
         "react-hot-loader/patch",
         "webpack-hot-middleware/client",
-        "../example/index.js",
-      ],
+        "../example/index.js"
+      ]
     },
     resolve: {
       alias: {
-        "react-dom": "@hot-loader/react-dom",
-      },
+        "react-dom": "@hot-loader/react-dom"
+      }
     },
     plugins: [
       new ManifestPlugin({ writeToFileEmit: true }),
@@ -106,17 +105,17 @@ if (!isProdMode) {
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: JSON.stringify("production"),
-        },
-      }),
-    ],
+          NODE_ENV: JSON.stringify("production")
+        }
+      })
+    ]
   };
 }
 
 const prodOrTest = {
   mode: "production",
   entry: {
-    index: ["index.jsx"],
+    index: ["index.jsx"]
   },
   externals: {
     react: {
@@ -124,41 +123,41 @@ const prodOrTest = {
       commonjs2: "react",
       commonjs: "react",
       amd: "react",
-      umd: "react",
+      umd: "react"
     },
     "react-dom": {
       root: "ReactDOM",
       commonjs2: "react-dom",
       commonjs: "react-dom",
       amd: "react-dom",
-      umd: "react-dom",
+      umd: "react-dom"
     },
     "styled-components": {
       commonjs: "styled-components",
       commonjs2: "styled-components",
-      amd: "styled-components",
+      amd: "styled-components"
     },
     "redux-logger": {
       commonjs: "redux-logger",
       commonjs2: "redux-logger",
-      amd: "redux-logger",
-    },
+      amd: "redux-logger"
+    }
   },
   optimization: {
-    minimizer: [],
+    minimizer: []
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
+      maxChunks: 1
+    })
   ],
   output: {
     path: publicPath,
     library: "audio-player-js",
     umdNamedDefine: true,
     libraryTarget: "umd",
-    filename: "[name].js",
-  },
+    filename: "[name].js"
+  }
 };
 
 module.exports = merge([common, isProdMode ? prodOrTest : development]);

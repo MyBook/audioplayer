@@ -6,7 +6,7 @@ import {
   CoverWrapper,
   CoverPlaceholder,
   TitlePlaceholder,
-  ChapterPlaceholder,
+  ChapterPlaceholder
 } from "components/BookInfo/index.styled";
 import truncate from "utils/truncate";
 import { Book } from "types";
@@ -20,18 +20,27 @@ type Props = {
   isPodcastOrLecture: boolean;
 };
 
+const maxTitlesLength = 20;
+
 export default function(props: Props) {
   const {
     currentChapterNumber,
     book = {},
     isFetched,
     Link,
-    isPodcastOrLecture,
+    isPodcastOrLecture
   } = props;
 
   if (isFetched && book.name) {
-    const { name, bookLink, default_image } = book;
+    const { name, bookLink, default_image, files } = book;
     const maxBookTitleLength = isPodcastOrLecture ? 60 : 35;
+    let titleText = "";
+
+    if (files && !isPodcastOrLecture) {
+      const title = files[currentChapterNumber].title;
+      titleText = title ? title : `Глава ${currentChapterNumber + 1}`;
+    }
+
     return (
       <BookInfoWrapper>
         <Link to={bookLink} className="clear-links-style">
@@ -44,7 +53,7 @@ export default function(props: Props) {
           <Link to={bookLink} className="clear-links-style">
             <Title>{truncate(name, maxBookTitleLength)}</Title>
           </Link>
-          {!isPodcastOrLecture && <>Глава {currentChapterNumber + 1}</>}
+          <span title={titleText}>{truncate(titleText, maxTitlesLength)}</span>
         </div>
       </BookInfoWrapper>
     );

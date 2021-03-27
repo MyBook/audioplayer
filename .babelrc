@@ -3,7 +3,6 @@
     "@babel/plugin-transform-runtime",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-flow-strip-types",
     "react-hot-loader/babel"
   ],
   "presets": [
