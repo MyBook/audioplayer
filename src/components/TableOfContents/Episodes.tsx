@@ -10,11 +10,15 @@ import truncate from "utils/truncate";
 export const longHeaderSize = 30;
 export const shortHeaderSize = 17;
 
+export const longHeaderSize = 30;
+export const shortHeaderSize = 17;
+
 export default function Episodes(props) {
   const { series, currentBookId, changeBook, currentTime, duration } = props;
 
   const episodes = series.books.map(({ name, id, seconds }, i) => {
     const isCurrentBook = id === currentBookId;
+
     return (
       <Chapter
         key={i}
