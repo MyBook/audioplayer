@@ -16,8 +16,8 @@ app.use(hotMiddleware(compiler, config.devServer));
 
 app.use(
   morgan(
-    ":date[clf] :method :url :status :res[content-length] - :response-time ms"
-  )
+    ":date[clf] :method :url :status :res[content-length] - :response-time ms",
+  ),
 );
 
 app.use("/static/public/", express.static("/static/public/"));
@@ -65,7 +65,7 @@ app.get("/api/audiofiles/218647/file.mp3", (req, res) => {
 
   res.writeHead(200, {
     "Content-Type": "audio/mpeg",
-    "Content-Length": stat.size
+    "Content-Length": stat.size,
   });
 
   const readStream = fs.createReadStream(filePath);
