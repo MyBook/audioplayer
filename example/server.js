@@ -76,6 +76,8 @@ app.get("/styles.css", (req, res) => {
   res.sendFile(path.resolve(`src/styles.css`));
 });
 
-app.listen(8080, () => {
-  console.log(`http://localhost:8080/`);
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}/`);
 });
