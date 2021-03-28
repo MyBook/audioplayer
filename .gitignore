@@ -97,4 +97,4 @@ gulpfile.js
 /flow-typed
 
 .python-version
-.config
+.config/
