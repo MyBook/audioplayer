@@ -12,7 +12,7 @@ export default function FreeFragmentMessage({
   TrialMessage,
   name,
   id,
-  bookLink
+  bookLink,
 }: Props) {
   return <TrialMessage name={name} bookLink={bookLink} id={id} />;
 }

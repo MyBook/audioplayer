@@ -92,14 +92,14 @@ export interface PlayerProps extends Options {
     isFreeFragment: boolean,
     urls: Urls,
     onChangeBook: OnChangeBook,
-    onCompleteBookListeningHandler: () => void
+    onCompleteBookListeningHandler: () => void,
   ) => void;
   getAutoBookmarkFromServer: (bookId: BookId, urls: Urls) => void;
   getBook: (
     bookId: BookId,
     urls: Urls,
     bookAdaptor: BookAdaptor,
-    seriesAdaptor: SeriesAdaptor
+    seriesAdaptor: SeriesAdaptor,
   ) => void;
   handleTimeUpdate: (time: Time) => void;
   handlePlay: () => void;

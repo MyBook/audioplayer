@@ -38,7 +38,7 @@ export default memo<Props>(function({
   playbackRate,
   isActive,
   isFetched,
-  className
+  className,
 }) {
   return (
     <PlaybackRateIcon

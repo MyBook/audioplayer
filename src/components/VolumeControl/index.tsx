@@ -15,17 +15,17 @@ const VolumeControlWrapper = styled.div`
 `;
 
 type Props = {
-  volume: number,
-  changeVolume: Function,
-  muteTrigger: Function,
-  isFetched: boolean
+  volume: number;
+  changeVolume: Function;
+  muteTrigger: Function;
+  isFetched: boolean;
 };
 
 export default function({
   volume,
   changeVolume,
   muteTrigger,
-  isFetched
+  isFetched,
 }: Props) {
   const defaultWidth = 125;
   return (

@@ -6,7 +6,7 @@ import {
   handlePause,
   handlePlay,
   handleTimeUpdate,
-  setFreeFragment
+  setFreeFragment,
 } from "thunks/playerControl";
 import { setAutoBookmark } from "thunks/bookmark";
 import { changeChapter } from "thunks/tableOfContents";
@@ -22,12 +22,12 @@ import {
   loadMetaDataAction,
   noNeedToTimeUpdateAction,
   set404ErrorAction,
-  startFetchingAction
+  startFetchingAction,
 } from "actions/init";
 import {
   pauseAction,
   playAction,
-  timeUpdateAction
+  timeUpdateAction,
 } from "actions/playerControl";
 
 function addKeyboardEventListeners({ dispatch, getState, urls }) {
@@ -44,13 +44,13 @@ function addKeyboardEventListeners({ dispatch, getState, urls }) {
     },
     handleForward: () => {
       dispatch(
-        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount)
+        handleTimeUpdate(getState().currentTime + defaultForwardSecondsCount),
       );
       tracking("onKeyForward");
     },
     handleBackward: () => {
       dispatch(
-        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount)
+        handleTimeUpdate(getState().currentTime - defaultForwardSecondsCount),
       );
       tracking("onKeyBackward");
     },
@@ -58,7 +58,7 @@ function addKeyboardEventListeners({ dispatch, getState, urls }) {
       const { volume } = getState();
       dispatch(changeVolume(volume === 0 ? 1 : 0));
       tracking("onKeyMute");
-    }
+    },
   });
 }
 
@@ -69,7 +69,7 @@ function addPlayerEventListeners({
   isFreeFragment,
   urls,
   changeBook,
-  onCompleteBookListeningHandler
+  onCompleteBookListeningHandler,
 }) {
   player.loop = false;
 
@@ -138,7 +138,7 @@ function addPlayerEventListeners({
         currentChapterNumber,
         book: currentBook,
         isPodcastOrLecture,
-        series
+        series,
       } = getState();
 
       player.pause();
@@ -146,7 +146,7 @@ function addPlayerEventListeners({
       if (isPodcastOrLecture) {
         const seriesBooks = series.books;
         const currentBookIndex = seriesBooks.findIndex(
-          book => currentBook.id === book.id
+          book => currentBook.id === book.id,
         );
 
         if (currentBookIndex !== -1 && seriesBooks[currentBookIndex + 1]) {
@@ -187,7 +187,7 @@ export const init = (
   isFreeFragment: boolean,
   urls,
   changeBook: Function,
-  onCompleteBookListeningHandler: () => void
+  onCompleteBookListeningHandler: () => void,
 ) => async (dispatch: Function, getState: Function) => {
   await dispatch(setFreeFragment(isFreeFragment));
 
@@ -205,7 +205,7 @@ export const init = (
     player,
     isFreeFragment,
     changeBook,
-    onCompleteBookListeningHandler
+    onCompleteBookListeningHandler,
   });
   addKeyboardEventListeners({ dispatch, getState, urls });
 
@@ -226,14 +226,14 @@ export const getBook = (
   bookId: number,
   urls,
   bookAdaptor,
-  seriesAdaptor
+  seriesAdaptor,
 ) => async (dispatch: Function) => {
   dispatch(startFetchingAction());
 
   const { url, version } = urls.getBook(bookId);
   const bookRaw = await doFetch({
     url,
-    version
+    version,
   });
   const book = bookAdaptor(bookRaw);
   let isPodcastOrLecture = false;

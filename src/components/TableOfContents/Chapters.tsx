@@ -2,14 +2,14 @@ import React from "react";
 import {
   Chapter,
   TableOfContentsWrapper,
-  Timing
+  Timing,
 } from "components/TableOfContents/index.styled";
 import timeFormatter from "components/utils/timeFormatter";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
 import {
   longHeaderSize,
-  shortHeaderSize
+  shortHeaderSize,
 } from "components/TableOfContents/Episodes";
 
 export default function Chapters(props) {
@@ -19,7 +19,7 @@ export default function Chapters(props) {
     changeChapter,
     handlePlay,
     currentTime,
-    duration
+    duration,
   } = props;
 
   const chapters = files.map((file, i) => {

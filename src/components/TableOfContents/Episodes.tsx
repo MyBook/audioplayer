@@ -2,13 +2,11 @@ import React from "react";
 import {
   Chapter,
   TableOfContentsWrapper,
-  Timing
+  Timing,
 } from "components/TableOfContents/index.styled";
 import timeFormatter from "components/utils/timeFormatter";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import truncate from "utils/truncate";
-export const longHeaderSize = 30;
-export const shortHeaderSize = 17;
 
 export const longHeaderSize = 30;
 export const shortHeaderSize = 17;

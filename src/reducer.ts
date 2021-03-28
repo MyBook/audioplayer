@@ -23,7 +23,7 @@ import {
   SET_SERVER_BOOKMARK,
   START_FETCHING,
   TABLE_OF_CONTENTS_TRIGGER,
-  TIME_UPDATE
+  TIME_UPDATE,
 } from "types";
 
 // @ts-ignore
@@ -50,44 +50,44 @@ const initialState: InitialState = {
   statisticsSeconds: 0,
   isFreeFragment: true,
   isNeedToTimeUpdate: false,
-  is404Error: false
+  is404Error: false,
 };
 
 export default function(
   state = initialState,
-  action: ActionTypes
+  action: ActionTypes,
 ): InitialState {
   switch (action.type) {
     case SET_FREE_FRAGMENT:
       return {
         ...state,
-        isFreeFragment: action.payload
+        isFreeFragment: action.payload,
       };
 
     case START_FETCHING:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
 
     case GET_BOOK:
       return {
         ...state,
         book: action.payload.book,
-        isPodcastOrLecture: action.payload.isPodcastOrLecture
+        isPodcastOrLecture: action.payload.isPodcastOrLecture,
       };
 
     case GET_SERIES:
       return {
         ...state,
-        series: action.payload
+        series: action.payload,
       };
 
     case CAN_PLAY:
       return {
         ...state,
         isFetched: true,
-        isFetching: false
+        isFetching: false,
       };
 
     case CHANGE_SOURCE:
@@ -97,104 +97,104 @@ export default function(
         currentChapterNumber: action.payload.currentChapterNumber,
         duration: 0,
         isFetched: false,
-        isFetching: true
+        isFetching: true,
       };
 
     case PLAY:
       return {
         ...state,
-        isPlaying: true
+        isPlaying: true,
       };
 
     case PAUSE:
       return {
         ...state,
-        isPlaying: false
+        isPlaying: false,
       };
 
     case LOADED_META_DATA:
       return {
         ...state,
-        duration: action.payload.duration
+        duration: action.payload.duration,
       };
 
     case TIME_UPDATE:
       return {
         ...state,
-        currentTime: action.payload
+        currentTime: action.payload,
       };
 
     case TABLE_OF_CONTENTS_TRIGGER:
       return {
         ...state,
-        isTableOfContentsShow: action.payload
+        isTableOfContentsShow: action.payload,
       };
 
     case PLAYBACK_CONTROL_RATE_TRIGGER:
       return {
         ...state,
-        isPlaybackRateControlShow: action.payload
+        isPlaybackRateControlShow: action.payload,
       };
 
     case BOOKMARKS_CONFLICT_NOTIFICATION_SHOW:
       return {
         ...state,
         isBookmarksConflictNotificationShow: true,
-        serverBookMark: action.payload
+        serverBookMark: action.payload,
       };
 
     case BOOKMARKS_CONFLICT_NOTIFICATION_HIDE:
       return {
         ...state,
-        isBookmarksConflictNotificationShow: false
+        isBookmarksConflictNotificationShow: false,
       };
 
     case SET_SERVER_BOOKMARK:
       return {
         ...state,
-        serverBookMark: action.payload
+        serverBookMark: action.payload,
       };
 
     case CHANGE_PLAYBACK_RATE:
       return {
         ...state,
-        playbackRate: action.payload
+        playbackRate: action.payload,
       };
 
     case CHANGE_VOLUME:
       return {
         ...state,
-        volume: action.payload
+        volume: action.payload,
       };
 
     case ADD_STATISTICS_SECONDS:
       return {
         ...state,
-        statisticsSeconds: state.statisticsSeconds + 1
+        statisticsSeconds: state.statisticsSeconds + 1,
       };
 
     case SEND_STATISTICS:
       return {
         ...state,
-        statisticsSeconds: 0
+        statisticsSeconds: 0,
       };
 
     case NEED_TO_TIME_UPDATE:
       return {
         ...state,
-        isNeedToTimeUpdate: true
+        isNeedToTimeUpdate: true,
       };
 
     case NO_NEED_TO_TIME_UPDATE:
       return {
         ...state,
-        isNeedToTimeUpdate: false
+        isNeedToTimeUpdate: false,
       };
 
     case SET_404_ERROR:
       return {
         ...state,
-        is404Error: true
+        is404Error: true,
       };
 
     case RESET_PLAYER:

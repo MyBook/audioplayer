@@ -7,12 +7,12 @@ import {
   SliderWrapper,
   Scale,
   Wrapper,
-  RangeItem
+  RangeItem,
 } from "components/PlaybackRateControl/index.styled";
 import { InitialState } from "types";
 import {
   changePlaybackRate,
-  playbackRateControlTrigger
+  playbackRateControlTrigger,
 } from "thunks/playbackRate";
 
 type Props = {
@@ -30,7 +30,7 @@ function PlaybackRateControl({
   playbackRateControlTrigger,
   changePlaybackRate,
   playbackRate,
-  isFetched
+  isFetched,
 }: Props) {
   const items = range.map(item => {
     return (
@@ -71,17 +71,17 @@ function PlaybackRateControl({
 const mapStateToProps = ({
   isPlaybackRateControlShow,
   playbackRate,
-  isFetched
+  isFetched,
 }: InitialState) => ({
   isPlaybackRateControlShow,
   playbackRate,
-  isFetched
+  isFetched,
 });
 
 export default connect(
   mapStateToProps,
   {
     playbackRateControlTrigger,
-    changePlaybackRate
-  }
+    changePlaybackRate,
+  },
 )(PlaybackRateControl);

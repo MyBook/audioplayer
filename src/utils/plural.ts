@@ -2,7 +2,7 @@ export default function(
   number: number,
   one: string,
   two: string,
-  five: string
+  five: string,
 ) {
   let n = Math.abs(number);
   n %= 100;

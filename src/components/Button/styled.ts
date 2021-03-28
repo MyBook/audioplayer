@@ -17,18 +17,18 @@ const variations = {
       color: props => props.theme.primary,
       background: "transparent",
       border: `2px solid ${props => props.theme.primary}`,
-      "box-shadow": `0 10px 20px 0 ${props => rgba(props.theme.primary, 0.2)}`
+      "box-shadow": `0 10px 20px 0 ${props => rgba(props.theme.primary, 0.2)}`,
     },
 
     active: {
       color: props => props.theme.primary,
       background: "transparent",
-      "border-color": props => props.theme.primary
+      "border-color": props => props.theme.primary,
     },
 
     focus: {
-      "box-shadow": `0 5px 20px 0 ${props => rgba(props.theme.primary, 0.8)}`
-    }
+      "box-shadow": `0 5px 20px 0 ${props => rgba(props.theme.primary, 0.8)}`,
+    },
   },
 
   stroked: {
@@ -40,18 +40,18 @@ const variations = {
     hover: {
       color: "white",
       background: props => props.theme.primary,
-      "box-shadow": `0 10px 20px 0 ${props => rgba(props.theme.primary, 0.2)}`
+      "box-shadow": `0 10px 20px 0 ${props => rgba(props.theme.primary, 0.2)}`,
     },
 
     active: {
       color: "white",
       background: props => props.theme.primary,
-      "border-color": props => props.theme.primary
+      "border-color": props => props.theme.primary,
     },
 
     focus: {
-      "box-shadow": `0 5px 20px 0 ${props => rgba(props.theme.primary, 0.8)}`
-    }
+      "box-shadow": `0 5px 20px 0 ${props => rgba(props.theme.primary, 0.8)}`,
+    },
   },
 
   white: {
@@ -63,18 +63,18 @@ const variations = {
     hover: {
       color: props => props.theme.primary,
       background: "white",
-      "box-shadow": "none"
+      "box-shadow": "none",
     },
 
     active: {
       color: "white",
-      background: props => props.theme.primary
+      background: props => props.theme.primary,
     },
 
     focus: {
-      "box-shadow": "0px 1px 11px 0px rgba(0,0,0, 0.6)"
-    }
-  }
+      "box-shadow": "0px 1px 11px 0px rgba(0,0,0, 0.6)",
+    },
+  },
 };
 
 const sizes: { [key: string]: { [key: string]: string | number } } = {
@@ -85,7 +85,7 @@ const sizes: { [key: string]: { [key: string]: string | number } } = {
     padding: "15px",
     display: "flex",
     width: "100%",
-    height: "50px"
+    height: "50px",
   },
 
   small: {
@@ -95,8 +95,8 @@ const sizes: { [key: string]: { [key: string]: string | number } } = {
     padding: "5px 10px",
     display: "inline-flex",
     width: "auto",
-    height: "28px"
-  }
+    height: "28px",
+  },
 };
 
 export const ButtonStyled = styled.button`
@@ -126,11 +126,11 @@ export const ButtonStyled = styled.button`
 
   &:hover {
     background: ${validateProp(
-      props => variations[props.variation].hover.background
+      props => variations[props.variation].hover.background,
     )};
     color: ${validateProp(props => variations[props.variation].hover.color)};
     box-shadow: ${validateProp(
-      props => variations[props.variation].hover["box-shadow"]
+      props => variations[props.variation].hover["box-shadow"],
     )};
     border: ${validateProp(props => variations[props.variation].hover.border)};
   }
@@ -139,7 +139,7 @@ export const ButtonStyled = styled.button`
     background: ${props => variations[props.variation].active.background};
     color: ${props => variations[props.variation].active.color};
     border-color: ${validateProp(
-      props => variations[props.variation].active["border-color"]
+      props => variations[props.variation].active["border-color"],
     )};
   }
 

@@ -6,13 +6,13 @@ import {
   bookmarksConflictNotificationHideAction,
   bookmarksConflictNotificationShowAction,
   setBookmarkAction,
-  setServerBookmarkAction
+  setServerBookmarkAction,
 } from "actions/bookmark";
 import { Urls } from "types";
 
 export const applyServerBookmark = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { book, serverBookMark } = getState();
   let chapterNumber = 0;
@@ -30,7 +30,7 @@ export const applyServerBookmark = () => async (
 
 export const getAutoBookmarkFromServer = (bookId: number, urls: Urls) => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { book, isFreeFragment } = getState();
 
@@ -51,7 +51,7 @@ export const getAutoBookmarkFromServer = (bookId: number, urls: Urls) => async (
   try {
     result = await doFetch({
       url,
-      version
+      version,
     });
   } catch (e) {
     if (e === "404") {
@@ -74,7 +74,7 @@ export const getAutoBookmarkFromServer = (bookId: number, urls: Urls) => async (
 
       setTimeout(
         () => dispatch(bookmarksConflictNotificationHideAction()),
-        10000
+        10000,
       );
     }
   } else {
@@ -85,7 +85,7 @@ export const getAutoBookmarkFromServer = (bookId: number, urls: Urls) => async (
 
 export const setAutoBookmark = (urls: Urls) => async (
   dispatch: Function,
-  getStore: Function
+  getStore: Function,
 ) => {
   const store = getStore();
   saveLocalAutoBookmark(store);
@@ -96,7 +96,7 @@ export const setAutoBookmark = (urls: Urls) => async (
     url,
     version,
     method: "POST",
-    data: JSON.stringify(autoBookMark)
+    data: JSON.stringify(autoBookMark),
   });
 
   dispatch(setBookmarkAction(result));
@@ -108,7 +108,7 @@ function saveLocalAutoBookmark(store) {
   const localBookmarks = localStorage.getItem("autoBookmarks");
   const newLocalBookmarks = JSON.stringify({
     ...JSON.parse(localBookmarks || "{}"),
-    [store.book.id]: autoBookMark
+    [store.book.id]: autoBookMark,
   });
 
   localStorage.setItem("autoBookmarks", newLocalBookmarks);
@@ -116,7 +116,7 @@ function saveLocalAutoBookmark(store) {
 
 function createBookMark(
   { book, currentTime, currentChapterNumber },
-  withChapter = true
+  withChapter = true,
 ) {
   const date = new Date();
 
@@ -127,7 +127,7 @@ function createBookMark(
     bookmarked_at: date.toISOString(),
     file: book.files[currentChapterNumber].id,
     position: Math.floor(currentTime),
-    chapterNumber: undefined
+    chapterNumber: undefined,
   };
 
   if (withChapter) {

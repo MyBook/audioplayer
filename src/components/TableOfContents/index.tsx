@@ -8,7 +8,7 @@ import {
   DropdownHeader,
   DropDownIconWrapper,
   DropdownWrapper,
-  TypeWrapper
+  TypeWrapper,
 } from "components/TableOfContents/index.styled";
 import Dropdown from "components/Dropdown";
 import ChaptersIcon from "components/Icons/Chapters";
@@ -22,7 +22,7 @@ import { InitialState } from "types";
 import { handlePlay } from "thunks/playerControl";
 import {
   changeChapter,
-  tableOfContentsShowTrigger
+  tableOfContentsShowTrigger,
 } from "thunks/tableOfContents";
 
 function TableOfContents({
@@ -38,7 +38,7 @@ function TableOfContents({
   Link,
   series,
   isPodcastOrLecture,
-  changeBook
+  changeBook,
 }) {
   const icon = (
     <ChaptersIcon
@@ -60,7 +60,7 @@ function TableOfContents({
     authorName,
     default_image,
     type,
-    id: currentBookId
+    id: currentBookId,
   } = book;
   return (
     <DropDownIconWrapper>
@@ -87,7 +87,7 @@ function TableOfContents({
                       TypeIcons("#9B9B9B", {
                         audiobook: "аудиокнига",
                         podcast: "подкаст",
-                        lecture: "лекция"
+                        lecture: "лекция",
                       })[type]
                     }
                   </TypeWrapper>
@@ -145,7 +145,7 @@ const mapStateToProps = ({
   isTableOfContentsShow,
   currentTime,
   duration,
-  isFetched
+  isFetched,
 }: InitialState) => ({
   book,
   series,
@@ -154,7 +154,7 @@ const mapStateToProps = ({
   isTableOfContentsShow,
   currentTime,
   duration,
-  isFetched
+  isFetched,
 });
 
 export default connect(
@@ -162,6 +162,6 @@ export default connect(
   {
     handlePlay,
     changeChapter,
-    tableOfContentsShowTrigger
-  }
+    tableOfContentsShowTrigger,
+  },
 )(TableOfContents);

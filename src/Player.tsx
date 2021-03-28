@@ -7,7 +7,7 @@ import {
   PlayerWrapper,
   IconsWrapper,
   FooterBottomSpace,
-  ControlWrapper
+  ControlWrapper,
 } from "index.styled";
 
 import thunks from "thunks";
@@ -26,8 +26,6 @@ import { defaultForwardSecondsCount } from "utils/playerConstants";
 import PowerOff, { PowerOffIconWrapper } from "components/Icons/PowerOff";
 import { removeEventsListeners } from "components/utils/keyboardEventsListeners";
 import { InitialState, PlayerProps } from "types";
-
-console.log({ thunks });
 
 class Player extends PureComponent<PlayerProps> {
   constructor(props: PlayerProps) {
@@ -67,7 +65,7 @@ class Player extends PureComponent<PlayerProps> {
       handlePlay,
       isFreeFragment,
       isEnableAutoplay,
-      onCompleteBookListeningHandler
+      onCompleteBookListeningHandler,
     } = this.props;
     try {
       await getBook(bookId, urls, bookAdaptor, seriesAdaptor);
@@ -75,7 +73,7 @@ class Player extends PureComponent<PlayerProps> {
         isFreeFragment,
         urls,
         changeBook,
-        onCompleteBookListeningHandler
+        onCompleteBookListeningHandler,
       );
       await getAutoBookmarkFromServer(bookId, urls);
       isEnableAutoplay && (await handlePlay());
@@ -123,7 +121,7 @@ class Player extends PureComponent<PlayerProps> {
       hidePlayer,
       changeBook,
       isPodcastOrLecture,
-      is404Error
+      is404Error,
     } = this.props;
 
     return (
@@ -212,7 +210,7 @@ const mapStateToProps = ({
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,
-  is404Error
+  is404Error,
 }: InitialState) => ({
   book,
   isPodcastOrLecture,
@@ -226,12 +224,12 @@ const mapStateToProps = ({
   playbackRate,
   volume,
   isBookmarksConflictNotificationShow,
-  is404Error
+  is404Error,
 });
 
 export default connect(
   mapStateToProps,
   {
-    ...thunks
-  }
+    ...thunks,
+  },
 )(Player);

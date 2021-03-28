@@ -4,14 +4,14 @@ import { sendStatisticsAction } from "actions/statistics";
 
 export const sendStatistics = urls => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { book, statisticsSeconds } = getState();
   const statisticElement = {
     book_id: book.id,
     seconds: statisticsSeconds,
     date: new Date().toISOString(),
-    uuid: uuid()
+    uuid: uuid(),
   };
 
   if (+statisticsSeconds !== 0) {
@@ -22,8 +22,8 @@ export const sendStatistics = urls => async (
         version,
         method: "POST",
         data: JSON.stringify({
-          objects: [...getLocalStatistics(), statisticElement]
-        })
+          objects: [...getLocalStatistics(), statisticElement],
+        }),
       });
       localStorage.setItem("statistics", "");
     } catch (e) {
@@ -48,8 +48,8 @@ function saveLocalStatistics(statisticElement) {
   const newLocalStatistics = JSON.stringify({
     objects: [
       ...((localStatistics && localStatistics.objects) || []),
-      statisticElement
-    ]
+      statisticElement,
+    ],
   });
 
   localStorage.setItem("statistics", newLocalStatistics);

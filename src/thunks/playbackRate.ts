@@ -2,14 +2,14 @@ import debounce from "utils/debounce";
 import tracking from "components/utils/tracking";
 import {
   changePlaybackRateAction,
-  playbackControlRateTriggerAction
+  playbackControlRateTriggerAction,
 } from "actions/playbackRate";
 
 const onChangeTempoTracking = debounce(() => tracking("onChangeTempo"), 1000);
 
 export const playbackRateControlTrigger = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { isPlaybackRateControlShow } = getState();
 
@@ -21,7 +21,7 @@ export const playbackRateControlTrigger = () => async (
 
 export const changePlaybackRate = (playbackRateRaw: number) => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { player } = getState();
   let playbackRate = +(+playbackRateRaw).toFixed(2);

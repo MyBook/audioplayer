@@ -1,8 +1,8 @@
 import React, { PureComponent, ReactElement } from "react";
 
 type Props = {
-  children: ReactElement,
-  trigger: () => void,
+  children: ReactElement;
+  trigger: () => void;
 };
 
 export default class Dropdown extends PureComponent<Props> {

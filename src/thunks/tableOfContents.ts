@@ -3,7 +3,7 @@ import { changeSource, tableOfContentsTrigger } from "actions/tableOfContents";
 
 export const tableOfContentsShowTrigger = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { isTableOfContentsShow } = getState();
 
@@ -16,14 +16,14 @@ export const tableOfContentsShowTrigger = () => async (
 
 export const changeChapter = (fileNumber: number) => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const {
     player,
     book,
     currentChapterNumber,
     volume,
-    playbackRate
+    playbackRate,
   } = getState();
 
   if (currentChapterNumber !== fileNumber) {

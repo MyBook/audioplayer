@@ -3,7 +3,7 @@ import React, { memo } from "react";
 import { TypeIcon } from "components/Icons/index.styled";
 
 type Props = {
-  color: string,
+  color: string;
 };
 
 export default memo<Props>(function AudioBookIcon({ color }) {

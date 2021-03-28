@@ -70,7 +70,7 @@ const loudIcons = {
         className="colored-path"
       />
     </>
-  )
+  ),
 };
 
 function getIconName(currentValue: number) {

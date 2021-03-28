@@ -8,13 +8,13 @@ import {
   SET_404_ERROR,
   START_FETCHING,
   INIT,
-  NEED_TO_TIME_UPDATE
+  NEED_TO_TIME_UPDATE,
 } from "types";
 
 export function loadMetaDataAction(duration: number) {
   return {
     type: LOADED_META_DATA,
-    payload: { duration }
+    payload: { duration },
   } as const;
 }
 
@@ -36,13 +36,13 @@ export function set404ErrorAction() {
 
 export function addStatisticsSecondsAction() {
   return {
-    type: ADD_STATISTICS_SECONDS
+    type: ADD_STATISTICS_SECONDS,
   } as const;
 }
 
 export function startFetchingAction() {
   return {
-    type: START_FETCHING
+    type: START_FETCHING,
   } as const;
 }
 
@@ -52,26 +52,26 @@ export function initAction() {
 
 export function getSeriesAction({
   series,
-  books
+  books,
 }: {
   series: any;
   books: any;
 }) {
   return {
     type: GET_SERIES,
-    payload: { ...series, books }
+    payload: { ...series, books },
   } as const;
 }
 
 export function getBookAction({
   book,
-  isPodcastOrLecture
+  isPodcastOrLecture,
 }: {
   book: any;
   isPodcastOrLecture: boolean;
 }) {
   return {
     type: GET_BOOK,
-    payload: { book, isPodcastOrLecture }
+    payload: { book, isPodcastOrLecture },
   } as const;
 }

@@ -20,17 +20,17 @@ export default async function({
   version,
   method = "GET",
   data: body = {},
-  returnCookie = false
+  returnCookie = false,
 }: Args) {
   const token = Cookies.get(
-    typeof CSRF_COOKIE_NAME !== "undefined" ? CSRF_COOKIE_NAME : "token"
+    typeof CSRF_COOKIE_NAME !== "undefined" ? CSRF_COOKIE_NAME : "token",
   );
 
   const defaultHeaders = {
     "X-CSRFToken": token || "token",
     "Content-Type": "application/json",
     credentials: "same-origin",
-    "x-proxy-api-host": "test.mybook.tech"
+    "x-proxy-api-host": "test.mybook.tech",
   };
 
   return instance({
@@ -38,11 +38,11 @@ export default async function({
     headers: {
       accept: `application/json; ${version ? `version=${version}` : ""}`,
       ...defaultHeaders,
-      ...headers
+      ...headers,
     },
     method,
     data: body,
-    withCredentials: true
+    withCredentials: true,
   })
     .then(res => {
       return returnCookie ? res.headers["set-cookie"] : res.data;

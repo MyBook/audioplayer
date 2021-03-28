@@ -1,7 +1,7 @@
 import React from "react";
 import {
   NotificationWrapper,
-  StyledButton
+  StyledButton,
 } from "components/Notification/index.styled";
 
 type Props = {

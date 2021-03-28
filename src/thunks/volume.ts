@@ -6,7 +6,7 @@ const onChangeVolumeTracking = debounce(() => tracking("onChangeVolume"), 1000);
 
 export const changeVolume = (volume: number) => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { player } = getState();
 
@@ -20,7 +20,7 @@ export const changeVolume = (volume: number) => async (
 
 export const muteTrigger = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { volume } = getState();
   if (+volume !== 0) {

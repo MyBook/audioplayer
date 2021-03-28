@@ -1,14 +1,14 @@
 import React, { PureComponent } from "react";
 import {
   getClickPositionX,
-  isCursorOutsideWrapper
+  isCursorOutsideWrapper,
 } from "components/utils/cursorPositionUtils";
 import {
   HorizontalSliderWrapper,
   Progress,
   Picker,
   ScrubArea,
-  HorizontalWrapper
+  HorizontalWrapper,
 } from "components/Sliders/index.styled";
 import { defaultHorizontalSliderWidth } from "utils/playerConstants";
 
@@ -24,7 +24,7 @@ type Props = {
 
 export default class extends PureComponent<Props> {
   static defaultProps = {
-    minimumValue: 0
+    minimumValue: 0,
   };
 
   wrapperRef: { current: null | HTMLDivElement };
@@ -37,7 +37,7 @@ export default class extends PureComponent<Props> {
   }
 
   changeValue = (
-    e: MouseEvent | TouchEvent | React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: MouseEvent | TouchEvent | React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     //если курсор по оси Х внутри враппера
     const wrapper = this.wrapperRef.current;
@@ -86,7 +86,7 @@ export default class extends PureComponent<Props> {
       overallValue,
       minimumValue,
       width = defaultHorizontalSliderWidth,
-      isFetched = true
+      isFetched = true,
     } = this.props;
     if (isFetched) {
       const position =
@@ -104,12 +104,12 @@ export default class extends PureComponent<Props> {
             />
             <Progress
               style={{
-                width: `${position}%`
+                width: `${position}%`,
               }}
             />
             <Picker
               style={{
-                left: `calc(${position}% - 8px)`
+                left: `calc(${position}% - 8px)`,
               }}
             />
           </HorizontalWrapper>

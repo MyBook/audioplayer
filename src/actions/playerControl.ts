@@ -3,7 +3,7 @@ import {
   PLAY,
   RESET_PLAYER,
   SET_FREE_FRAGMENT,
-  TIME_UPDATE
+  TIME_UPDATE,
 } from "types";
 
 export function pauseAction() {
@@ -16,19 +16,19 @@ export function playAction() {
 export function timeUpdateAction(time: number) {
   return {
     type: TIME_UPDATE,
-    payload: time
+    payload: time,
   } as const;
 }
 
 export function setFreeFragmentAction(isFreeFragment: boolean) {
   return {
     type: SET_FREE_FRAGMENT,
-    payload: isFreeFragment
+    payload: isFreeFragment,
   } as const;
 }
 
 export function resetPlayerAction() {
   return {
-    type: RESET_PLAYER
+    type: RESET_PLAYER,
   } as const;
 }

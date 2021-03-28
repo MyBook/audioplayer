@@ -5,7 +5,7 @@ import LectureIcon from "components/Icons/Lecture";
 
 export default function TypeIcons(
   font_color: string,
-  texts: { audiobook?: string, podcast?: string, lecture?: string }
+  texts: { audiobook?: string; podcast?: string; lecture?: string },
 ) {
   return {
     audiobook: (
@@ -25,6 +25,6 @@ export default function TypeIcons(
         <LectureIcon color={font_color} />
         {texts && texts.lecture}
       </Fragment>
-    )
+    ),
   };
 }

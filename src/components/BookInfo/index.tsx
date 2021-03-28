@@ -6,7 +6,7 @@ import {
   CoverWrapper,
   CoverPlaceholder,
   TitlePlaceholder,
-  ChapterPlaceholder
+  ChapterPlaceholder,
 } from "components/BookInfo/index.styled";
 import truncate from "utils/truncate";
 import { Book } from "types";
@@ -28,7 +28,7 @@ export default function(props: Props) {
     book = {},
     isFetched,
     Link,
-    isPodcastOrLecture
+    isPodcastOrLecture,
   } = props;
 
   if (isFetched && book.name) {

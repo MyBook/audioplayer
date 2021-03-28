@@ -19,7 +19,7 @@ function PlayPauseButton({
   handlePlay,
   isPlaying,
   isFetched,
-  urls
+  urls,
 }: Props) {
   return (
     <Wrapper>
@@ -35,13 +35,13 @@ function PlayPauseButton({
 const mapStateToProps = ({ book, isPlaying, isFetched }: InitialState) => ({
   book,
   isPlaying,
-  isFetched
+  isFetched,
 });
 
 export default connect(
   mapStateToProps,
   {
     handlePlay,
-    handlePause
-  }
+    handlePause,
+  },
 )(PlayPauseButton);

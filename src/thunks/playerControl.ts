@@ -1,12 +1,12 @@
 import {
   resetPlayerAction,
   setFreeFragmentAction,
-  timeUpdateAction
+  timeUpdateAction,
 } from "actions/playerControl";
 
 export const handlePause = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { player } = getState();
 
@@ -15,7 +15,7 @@ export const handlePause = () => async (
 
 export const handlePlay = () => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   try {
     const { player } = getState();
@@ -28,7 +28,7 @@ export const handlePlay = () => async (
 
 export const handleTimeUpdate = (time: number) => async (
   dispatch: Function,
-  getState: Function
+  getState: Function,
 ) => {
   const { player } = getState();
   player.currentTime = time;
@@ -37,7 +37,7 @@ export const handleTimeUpdate = (time: number) => async (
 };
 
 export const setFreeFragment = (isFreeFragment: boolean) => async (
-  dispatch: Function
+  dispatch: Function,
 ) => {
   dispatch(setFreeFragmentAction(isFreeFragment));
 };

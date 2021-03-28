@@ -1,10 +1,10 @@
 // @flow
 
 type Functions = {
-  triggerPlay: Function,
-  handleForward: Function,
-  handleBackward: Function,
-  handleMute: Function,
+  triggerPlay: Function;
+  handleForward: Function;
+  handleBackward: Function;
+  handleMute: Function;
 };
 
 function handleKeydown(e) {

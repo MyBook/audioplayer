@@ -17,7 +17,7 @@ export default class Button extends React.PureComponent<ButtonProps, {}> {
   static defaultProps = {
     variation: "default",
     size: "default",
-    disabled: false
+    disabled: false,
   };
 
   onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

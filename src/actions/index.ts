@@ -13,5 +13,5 @@ export default {
   ...playerControl,
   ...statistics,
   ...tableOfContents,
-  ...volume
+  ...volume,
 };

@@ -3,8 +3,8 @@ import React, { memo } from "react";
 import { IconWrapper } from "components/Icons/index.styled";
 
 type Props = {
-  onClick: Function,
-  isFetched: boolean,
+  onClick: Function;
+  isFetched: boolean;
 };
 
 export default memo<Props>(function({ onClick, isFetched }) {

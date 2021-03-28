@@ -8,7 +8,7 @@ import Player from "Player";
 import { PlayerProps } from "types";
 
 const logger = createLogger({
-  collapsed: true
+  collapsed: true,
 });
 
 type Props = PlayerProps;
@@ -16,7 +16,7 @@ type Props = PlayerProps;
 const middleware = [
   thunk,
   // @ts-ignore
-  global.IS_BROWSER && NODE_ENV === "development" && logger
+  global.IS_BROWSER && NODE_ENV === "development" && logger,
 ].filter(Boolean);
 const store = compose(applyMiddleware(...middleware))(createStore)(reducer);
 
